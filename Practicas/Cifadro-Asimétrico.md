@@ -361,7 +361,7 @@ Es necesario seguir un determinado orden a la hora de llevar a cabo la eliminaci
 Para eliminar la clave privada haremos uso de la opción --delete-secret-key <nombre> de gpg. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
 
 ```
-madandy@toyota-hilux:~/Descargas$ 
+madandy@toyota-hilux:~$ 
 gpg --delete-secret-key "Andrés Morales González"
 gpg (GnuPG) 2.2.40; Copyright (C) 2022 g10 Code GmbH
 This is free software: you are free to change and redistribute it.
@@ -370,24 +370,51 @@ There is NO WARRANTY, to the extent permitted by law.
 
 sec  rsa3072/D3D72D48F47B673D 2024-12-12 Andrés Morales González <asirandyglez@gmail.com>
 
-¿Eliminar esta clave del anillo? (s/N) 
+¿Eliminar esta clave del anillo? (s/N) s
+¡Es una clave secreta! ¿Eliminar realmente? (s/N) s
+
 
 ```
 
 Tras un par de confirmaciones, nuestra clave privada se encontrara eliminada, así que por último, vamos a eliminar la clave pública. Para ello, haremos uso de la opción --delete-key <nombre> de gpg. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
 
 ```
-madandy@toyota-hilux:~/Descargas$ 
+madandy@toyota-hilux:~$ 
 gpg --delete-key "Andrés Morales González"
 gpg (GnuPG) 2.2.40; Copyright (C) 2022 g10 Code GmbH
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
-gpg: ¡hay una clave secreta para esta clave pública! "Andrés Morales González"!
-gpg: use antes la opción "--delete-secret-key" para borrarla.
+
+pub  rsa3072/D3D72D48F47B673D 2024-12-12 Andrés Morales González <asirandyglez@gmail.com>
+
+¿Eliminar esta clave del anillo? (s/N) s
+
 
 ```
 Listo. Nuestro par de claves ya se encuentra eliminado, pero para verificarlo, volveremos a ejecutar los comandos:
+
+```
+madandy@toyota-hilux:~$ 
+gpg --list-keys
+gpg: comprobando base de datos de confianza
+gpg: no se encuentran claves absolutamente fiables
+/home/madandy/.gnupg/pubring.kbx
+--------------------------------
+pub   rsa3072 2024-12-12 [SC] [caduca: 2026-12-12]
+      B39722468D0599C3B62F9AEA9E7BEEE532BE0469
+uid        [desconocida] Alejandro Liáñez Frutos <alejandroliafru@gmail.com>
+sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
+
+```
+
+```
+madandy@toyota-hilux:~$ 
+gpg --list-secret-keys
+
+```
+
+Como se puede apreciar, no ha quedado ningún rastro de nuestro par de claves, la única clave existente actualmente en nuestra máquina es la clave pública de Alejandro.
 
 # Tarea 4: Exportar clave a un servidor público de claves PGP (gpg).
 
