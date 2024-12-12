@@ -23,7 +23,6 @@ Lo primero que nos pedirá será nuestro nombre junto con los apellidos, logrand
 
 ```
 Nombre y apellidos: Andrés Morales González
-
 ```
 Tras ello, nos pedirá también nuestra dirección de correo electronico asi que la introduciremos y continuaremos.
 
@@ -34,7 +33,6 @@ Ha seleccionado este ID de usuario:
     "Andrés Morales González <asirandyglez@gmail.com>"
 
 ¿Cambia (N)ombre, (D)irección o (V)ale/(S)alir? 
-
 ```
 Una vez introducida dicha información, nos mostrará los datos y nos pedirá una confirmación. En caso de que los datos mostrados sean correctos, elegiremos la opción V.
 
@@ -46,9 +44,8 @@ alguna otra tarea (trabajar en otra ventana/consola, mover el ratón, usar
 la red y los discos) durante la generación de números primos. Esto da al
 generador de números aleatorios mayor oportunidad de recoger suficiente
 entropía.
-
 ```
-Cuando lleguemos a este punto se nos pedirá una frase de paso para proteger nuestra clave privada, así que la introduciremos dos veces y continuaremos para que comience la generación del par de claves. Tal y como se nos ha indicado en el mensaje, es aconsejable realizar alguna que otra tarea en nuestra máquina durante su generación.
+Cuando lleguemos a este punto se nos pedirá una frase de paso para proteger nuestra ***clave privada***, así que la introduciremos dos veces y continuaremos para que comience la generación del par de claves. Tal y como se nos ha indicado en el mensaje, es aconsejable realizar alguna que otra tarea en nuestra máquina durante su generación.
 
 ```
 gpg: creado el directorio '/home/madandy/.gnupg/openpgp-revocs.d'
@@ -59,15 +56,13 @@ pub   rsa3072 2024-12-12 [SC] [caduca: 2026-12-12]
       AA989A5B6AEC4D0C4F5C877ED3D72D48F47B673D
 uid                      Andrés Morales González <asirandyglez@gmail.com>
 sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
-
-
 ```
 
-Nuestro par de claves ya se encuentra generado y añadido con confianza absoluta a nuestro keyring pubring.kbx, que se encuentra almacenado en nuestro directorio personal, dentro de un directorio de nombre .gnupg/. Además, ha generado de forma automática un certificado de revocación dentro de .gnupg/openpgp-revocs.d/ por si nuestra clave privada llegase a malas manos o simplemente quisiésemos dejar de utilizar dicho par de claves, de manera que se notificará a otros usuarios que la clave pública no debe ser usada nunca más para cifrar.
+Nuestro par de claves ya se encuentra generado y añadido con confianza absoluta a nuestro keyring ***pubring.kbx***, que se encuentra almacenado en nuestro directorio personal, dentro de un directorio de nombre ***.gnupg/***. Además, ha generado de forma automática un certificado de revocación dentro de ***.gnupg/openpgp-revocs.d/*** por si nuestra clave privada llegase a malas manos o simplemente quisiésemos dejar de utilizar dicho par de claves, de manera que se notificará a otros usuarios que la clave pública no debe ser usada nunca más para cifrar.
 
 ## Lista las claves públicas que tienes en tu almacén de claves. Explica los distintos datos que nos muestra. ¿Cómo deberías haber generado las claves para indicar, por ejemplo, que tenga un 1 mes de validez?
 
-Para listar las claves públicas haremos uso de la opción --list-keys de gpg:
+Para listar las claves públicas haremos uso de la opción ```--list-keys``` de gpg:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -84,7 +79,7 @@ sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
 
 En lugar de explicar ahora los datos que nos ha mostrado, vamos a esperar al siguiente ejercicio y así podemos hacer una explicación más completa y detallada sobre la información que se está mostrando.
 
-Para generar claves con una determinada validez, tendríamos que haber hecho uso de la opción --full-gen-key de gpg, donde nos habríamos encontrado un mensaje de la siguiente forma:
+Para generar claves con una determinada validez, tendríamos que haber hecho uso de la opción ```--full-gen-key``` de **gpg**, donde nos habríamos encontrado un mensaje de la siguiente forma:
 
 Lo primero que tendriamos que hacer es elegir el tipo de clave que vamos a querer, por defecto elegiremos el primero, ya que es RSA:
 
@@ -109,10 +104,10 @@ Lo segundo que nos apareceria por pantalla es el tamaño de la clave como ya la 
 ```
 ¿De qué tamaño quiere la clave? (3072) 
 El tamaño requerido es de 3072 bits
-
 ```
 
 Y ahora es cuando viene el tiempo de validez para dicha clave, y aqui podemos especificar su tiempo:
+
 ```
 Por favor, especifique el período de validez de la clave.
          0 = la clave nunca caduca
@@ -121,9 +116,8 @@ Por favor, especifique el período de validez de la clave.
       <n>m = la clave caduca en n meses
       <n>y = la clave caduca en n años
 ¿Validez de la clave (0)? 
-
 ```
-Introduciríamos la validez deseada siguiendo el esquema que nos ha mostrado, en este caso, para que tenga un mes de validez, podríamos haber indicado *30*, *4w* o *1m*, pues todas hacen referencia al mismo lapso de tiempo.
+Introduciríamos la validez deseada siguiendo el esquema que nos ha mostrado, en este caso, para que tenga un mes de validez, podríamos haber indicado ***30***, ***4w*** o ***1m***, pues todas hacen referencia al mismo lapso de tiempo.
 
 
 ## Lista las claves privadas de tu almacén de claves.
@@ -209,15 +203,14 @@ De esta forma, los pares de claves ofrecen flexibilidad y seguridad al manejar l
 
 ## Exporta tu clave pública en formato ASCII, guárdalo en un archivo “nombre_apellido.asc” y envíalo al compañero con el que vas a hacer esta práctica.
 
-Para exportar nuestras claves públicas haremos uso de la opción --export de gpg junto con la opción -a <nombre>, para posteriormente redireccionar la salida a un fichero. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
+Para exportar nuestras claves públicas haremos uso de la opción --export de gpg junto con la opción ***-a <nombre>***, para posteriormente redireccionar la salida a un fichero. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
 gpg --export -a "Andrés Morales González" > andres_amg.asc
-
 ```
 
-Como podemos ver este comando no nos ha devuelto ninguna salida por pantalla por lo que vamso a comprobarlo haciendo un ls:
+Como podemos ver este comando no nos ha devuelto ninguna salida por pantalla por lo que vamso a comprobarlo haciendo un ```ls```:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -227,7 +220,7 @@ Descargas       examen24-25.sql  homebrew  kernel  oracle_vbox_2016.asc  prueba.
 Documentos      gems             Imágenes  Música  Plantillas            Público     themes     win10.qcow2
 
 ```
-Efectivamente, las claves públicas se encuentran correctamente exportadas dentro del fichero *andres_amg.asc*.
+Efectivamente, las claves públicas se encuentran correctamente exportadas dentro del fichero ***andres_amg.asc***.
 
 Esta practica la he realizado junto a *Alejandro Liañez Frutos*, por lo que le he paso mi clave a través de una plataforma de comunicación:
 
@@ -237,9 +230,9 @@ Esta practica la he realizado junto a *Alejandro Liañez Frutos*, por lo que le 
 
 Ahora me bajo la calve publica de mi compañero Alejandro:
 
-![Envio de clave](./img/imagecopy.png)
+![Descarga de clave](./img/imagecopy.png)
 
-Para importar las claves públicas de nuestro compañero haremos uso de la opción --import <fichero> de gpg. En este caso, el fichero que debemos introducir es el que acabamos de recibir, es decir, alejandro_alf.asc. El comando a ejecutar sería:
+Para importar las claves públicas de nuestro compañero haremos uso de la opción ```--import <fichero>``` de gpg. En este caso, el fichero que debemos introducir es el que acabamos de recibir, es decir, ***alejandro_alf.asc***. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -247,7 +240,6 @@ gpg --import alejandro_alf.asc
 gpg: clave 9E7BEEE532BE0469: clave pública "Alejandro Liáñez Frutos <alejandroliafru@gmail.com>" importada
 gpg: Cantidad total procesada: 1
 gpg:               importadas: 1
-
 ```
 
 Como podemos observar, nos ha devuelto un mensaje por pantalla informando que las claves públicas de Alejandro han sido correctamente importadas.
@@ -255,7 +247,7 @@ Como podemos observar, nos ha devuelto un mensaje por pantalla informando que la
 
 ## Comprueba que las claves se han incluido correctamente en vuestro keyring.
 
-De nuevo, volveremos a hacer uso de opción --list-keys de gpg (ya que no tendría sentido usar la opción --list-secret-keys, pues lo que hemos importado son claves públicas, no privadas) para verificar que las claves públicas han sido correctamente importadas a nuestro keyring:
+De nuevo, volveremos a hacer uso de opción ```--list-keys``` de gpg (ya que no tendría sentido usar la opción ```--list-secret-keys```, pues lo que hemos importado son claves públicas, no privadas) para verificar que las claves públicas han sido correctamente importadas a nuestro keyring:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -271,15 +263,15 @@ pub   rsa3072 2024-12-12 [SC] [caduca: 2026-12-12]
       B39722468D0599C3B62F9AEA9E7BEEE532BE0469
 uid        [desconocida] Alejandro Liáñez Frutos <alejandroliafru@gmail.com>
 sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
-
 ```
 
-Y efectivamente, las claves públicas de Alejandro han sido correctamente importadas a nuestro keyring en .gnupg/pubring.kbx.
+Y efectivamente, las claves públicas de Alejandro han sido correctamente importadas a nuestro keyring en ***.gnupg/pubring.kbx***.
+
 # Tarea 3: Cifrado asimétrico con claves públicas (gpg).
 
 ## Cifraremos un archivo cualquiera y lo remitiremos por email a uno de nuestros compañeros que nos proporcionó su clave pública.
 
-En este caso, hemos creado un fichero .txt de nombre archivo.txt que es el que voy a encriptar con la clave pública de mi compañero para posteriormente enviárselo. Para cifrar haremos uso de la opción -e de gpg junto con la opción -u <remitente> y la opción -r <destinatario>, para posteriormente indicar el fichero a cifrar. En este caso, el remitente sería yo y el destinatario, Alejandro, de manera que introduciendo su nombre como destinatario, buscará entre las claves públicas existentes y usará la suya, para que no haya confusión. El comando a ejecutar sería:
+En este caso, hemos creado un fichero .txt de nombre archivo.txt que es el que voy a encriptar con la clave pública de mi compañero para posteriormente enviárselo. Para cifrar haremos uso de la opción -e de gpg junto con la ```opción -u <remitente>``` y la ````opción -r <destinatario>````, para posteriormente indicar el fichero a cifrar. En este caso, el remitente sería yo y el destinatario, Alejandro, de manera que introduciendo su nombre como destinatario, buscará entre las claves públicas existentes y usará la suya, para que no haya confusión. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -296,7 +288,6 @@ identificador de usuario. Si *realmente* sabe lo que está haciendo,
 puede contestar sí a la siguiente pregunta.
 
 ¿Usar esta clave de todas formas? (s/N) s
-
 ```
 
 Tras mostrarnos una advertencia de seguridad y confirmar que queremos usar dicha clave, el fichero ya se encontrará cifrado, por lo que vamos a proceder a ejecutar el correspondiente comando para asegurarnos de que así ha sido:
@@ -306,10 +297,9 @@ madandy@toyota-hilux:~$
 ls -l | egrep archivo
 -rw-r--r--  1 madandy madandy         525 dic 12 16:21 archivo_cifrado.gpg
 -rw-r--r--  1 madandy madandy          66 dic 12 16:19 archivo.txt
-
 ```
 
-Como se puede apreciar ahora tenemos dos ficheros, el original (archivo.pdf) y el cifrado (archivo.pdf.gpg), que cuenta con la extensión .gpg.
+Como se puede apreciar ahora tenemos dos ficheros, el original (***archivo.pdf***) y el cifrado (***archivo.pdf.gpg***), que cuenta con la _**extensión**_ **.gpg**.
 
 Y ahora nos lo enviaremos a través de Discord.
 
@@ -335,9 +325,8 @@ gpg: cifrado con clave de 3072 bits RSA, ID 923AF5638EF96976, creada el 2024-12-
       "Andrés Morales González <asirandyglez@gmail.com>"
 Hola Andrés, este es el archivo de la Tarea 3 de la práctica.
 madandy@toyota-hilux:~/Descargas$ 
-
 ```
-Esto se debe a que es un texto plano, pero si fuera un *PDF* lo que tendriamos que hacer para visualizarlo correctamente es volver a ejecutar el comando pero esta vez, redirigiendo la salida a un fichero de formato .pdf (por ejemplo, a uno de nombre desencriptado.pdf), de la siguiente maera:
+Esto se debe a que es un texto plano, pero si fuera un *PDF* lo que tendriamos que hacer para visualizarlo correctamente es volver a ejecutar el comando pero esta vez, redirigiendo la salida a un fichero de formato .pdf (por ejemplo, a uno de nombre desencriptado.pdf), de la siguiente manera:
 
 ```
 gpg -d espartaco.pdf.gpg > desencriptado.pdf
@@ -358,7 +347,9 @@ Es importante mencionar que en caso de que no vayamos a usar más un par de clav
 
 Es necesario seguir un determinado orden a la hora de llevar a cabo la eliminación de dicho par de claves, ya que de lo contrario, nos devolverá un error. Primero hay que eliminar la clave privada y posteriormente, la clave pública.
 
-Para eliminar la clave privada haremos uso de la opción --delete-secret-key <nombre> de gpg. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
+Para eliminar la clave privada haremos uso de la opción ````--delete-secret-key <nombre>```` de gpg. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. 
+
+El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -372,11 +363,9 @@ sec  rsa3072/D3D72D48F47B673D 2024-12-12 Andrés Morales González <asirandyglez
 
 ¿Eliminar esta clave del anillo? (s/N) s
 ¡Es una clave secreta! ¿Eliminar realmente? (s/N) s
-
-
 ```
 
-Tras un par de confirmaciones, nuestra clave privada se encontrara eliminada, así que por último, vamos a eliminar la clave pública. Para ello, haremos uso de la opción --delete-key <nombre> de gpg. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
+Tras un par de confirmaciones, nuestra clave privada se encontrara eliminada, así que por último, vamos a eliminar la clave pública. Para ello, haremos uso de la opción ```--delete-key <nombre>``` de gpg. En este caso, el nombre que debemos introducir es el mismo que hemos introducido a la hora de generar el par de claves. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -389,8 +378,6 @@ There is NO WARRANTY, to the extent permitted by law.
 pub  rsa3072/D3D72D48F47B673D 2024-12-12 Andrés Morales González <asirandyglez@gmail.com>
 
 ¿Eliminar esta clave del anillo? (s/N) s
-
-
 ```
 Listo. Nuestro par de claves ya se encuentra eliminado, pero para verificarlo, volveremos a ejecutar los comandos:
 
@@ -405,8 +392,8 @@ pub   rsa3072 2024-12-12 [SC] [caduca: 2026-12-12]
       B39722468D0599C3B62F9AEA9E7BEEE532BE0469
 uid        [desconocida] Alejandro Liáñez Frutos <alejandroliafru@gmail.com>
 sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
-
 ```
+Ahora listamos lo que sería las claves, para ver si están:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -420,7 +407,7 @@ Como se puede apreciar, no ha quedado ningún rastro de nuestro par de claves, l
 
 ## Genera la clave de revocación de tu clave pública para utilizarla en caso de que haya problemas.
 
-En realidad, gpg ha generado una clave de revocación de forma automática cuando se generó el par de claves, pero para mostrarlo, vamos a generar uno nuevo. Para ello, haremos uso de la opción --gen-revoke <ID> de gpg. En este caso, el ID que debemos introducir es aquel identificador (comunmente conocido como fingerprint) de 40 dígitos que encontramos al ejecutar el comando gpg --list-keys, aunque si especificamos los últimos 8 dígitos del mismo también sería válido. El comando a ejecutar sería:
+En realidad, gpg ha generado una clave de revocación de forma automática cuando se generó el par de claves, pero para mostrarlo, vamos a generar uno nuevo. Para ello, haremos uso de la opción ```--gen-revoke <ID>``` de gpg. En este caso, el ID que debemos introducir es aquel identificador (comunmente conocido como fingerprint) de 40 dígitos que encontramos al ejecutar el comando gpg ```--list-keys```, aunque si especificamos los últimos 8 dígitos del mismo también sería válido. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~/Descargas$ 
@@ -468,13 +455,13 @@ de impresión de su máquina podría almacenar los datos y hacerlos accesibles
 a otras personas!
 
 ```
-El certificado de revocación es aquello contenido entre —–BEGIN PGP PUBLIC KEY BLOCK—– y —–END PGP PUBLIC KEY BLOCK—–, por lo que es necesario guardarlo en un lugar seguro por si en algún momento necesitásemos revocar nuestro par de claves (soy consciente de que estoy mostrando el certificado, pero no es algo relevante, pues el par de claves fue generado únicamente para la práctica y ya ha sido revocado).
+El certificado de revocación es aquello contenido entre **—–BEGIN PGP PUBLIC KEY BLOCK—– y —–END PGP PUBLIC KEY BLOCK—–**, por lo que es necesario guardarlo en un lugar seguro por si en algún momento necesitásemos revocar nuestro par de claves (soy consciente de que estoy mostrando el certificado, pero no es algo relevante, pues el par de claves fue generado únicamente para la práctica y ya ha sido revocado).
 
 
 ## Exporta tu clave pública al servidor pgp.rediris.es.
 
 
-Para exportar la clave pública a un servidor de claves públicas haremos uso de la opción --keyserver <servidor> de gpg junto con la opción --send-key <ID>. En este caso, el servidor que debemos introducir es pgp.rediris.es y el ID es aquel identificador (fingerprint) de 40 dígitos que encontramos al ejecutar el comando gpg --list-keys, aunque si especificamos los últimos 8 dígitos del mismo también sería válido. El comando a ejecutar sería:
+Para exportar la clave pública a un servidor de claves públicas haremos uso de la opción ```--keyserver <servidor>``` de gpg junto con la opción ```--send-key <ID>```. En este caso, el servidor que debemos introducir es pgp.rediris.es y el ID es aquel identificador (fingerprint) de 40 dígitos que encontramos al ejecutar el comando gpg ```--list-keys```, aunque si especificamos los últimos 8 dígitos del mismo también sería válido. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~/Descargas$ 
@@ -483,11 +470,13 @@ gpg: enviando clave D3D72D48F47B673D a hkp://pgp.rediris.es
 
 ```
 
-Nuestra clave ya ha sido enviada al servidor de claves públicas pgp.rediris.es, pero para verificarlo, vamos a acceder al mismo mediante el navegador. Dentro, encontraremos un apartado para buscar claves públicas introduciendo un string, que puede ser nuestro nombre o nuestro correo electrónico, por ejemplo. En este caso, voy a introducir mi correo electrónico:
+Nuestra clave ya ha sido enviada al servidor de claves públicas pgp.rediris.es, pero para verificarlo, vamos a acceder al mismo mediante el navegador. Dentro, encontraremos un apartado para buscar claves públicas introduciendo un string, que puede ser nuestro nombre o nuestro correo electrónico, por ejemplo. 
+
+En este caso, voy a introducir mi correo electrónico:
 
 ![Envio de clave](./img/image2.png)
 
-Tras ello, pulsaremos en “Search for a key” para ver los resultados y así verificar que la clave pública se encuentra correctamente subida:
+Tras ello, pulsaremos en ***“Search for a key”*** para ver los resultados y así verificar que la clave pública se encuentra correctamente subida:
 
 ![alt text](./img/image3.png)
 
@@ -495,7 +484,9 @@ Como se puede apreciar, ha aparecido una coincidencia referente a la clave que a
 
 ## Borra la clave pública de alguno de tus compañeros de clase e impórtala ahora del servidor público de rediris.
 
-Tal y como hemos visto en uno de los ejercicios anteriores, para eliminar una clave pública de nuestro keyring, haremos uso de la opción --delete-key <nombre> de gpg. En este caso, el nombre que debemos introducir es el de Alejandro. El comando a ejecutar sería:
+Tal y como hemos visto en uno de los ejercicios anteriores, para eliminar una clave pública de nuestro keyring, haremos uso de la opción ```--delete-key <nombre>``` de gpg. En este caso, el nombre que debemos introducir es el de Alejandro.
+
+El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~/Descargas$ 
@@ -508,7 +499,6 @@ There is NO WARRANTY, to the extent permitted by law.
 pub  rsa3072/9E7BEEE532BE0469 2024-12-12 Alejandro Liáñez Frutos <alejandroliafru@gmail.com>
 
 ¿Eliminar esta clave del anillo? (s/N) s
-
 ```
 
 Listo. La clave pública de Alejandro ya se encuentra eliminada, pero para verificarlo, volveremos a ejecutar el comando:
@@ -522,12 +512,13 @@ pub   rsa3072 2024-12-12 [SC] [caduca: 2026-12-12]
       AA989A5B6AEC4D0C4F5C877ED3D72D48F47B673D
 uid        [  absoluta ] Andrés Morales González <asirandyglez@gmail.com>
 sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
-
 ```
 
 Como podemos ver no hay registro de ninguna clave pública.
 
-Una vez que la clave pública ha sido totalmente eliminada, es hora de volver a importarla, pero esta vez, desde el servidor de claves públicas. Para ello, haremos uso de la opción --keyserver <servidor> de gpg junto con la opción --recv-keys <ID>. En este caso, el servidor que debemos introducir es pgp.rediris.es y el ID es aquel identificador (fingerprint) de 40 dígitos de la clave de Alejandro, aunque si especificamos los últimos 8 dígitos del mismo también sería válido. El comando a ejecutar sería:
+Una vez que la clave pública ha sido totalmente eliminada, es hora de volver a importarla, pero esta vez, desde el servidor de claves públicas. Para ello, haremos uso de la opción ```--keyserver <servidor>``` de gpg junto con la opción ```--recv-keys <ID>```. En este caso, el servidor que debemos introducir es pgp.rediris.es y el ID es aquel identificador (fingerprint) de 40 dígitos de la clave de Alejandro, aunque si especificamos los últimos 8 dígitos del mismo también sería válido. 
+
+El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~/Descargas$ 
@@ -537,7 +528,7 @@ gpg: data source: http://130.206.1.8:11371
 	  3072 bit RSA key 9E7BEEE532BE0469, creado: 2024-12-12, caduca: 2026-12-12
 Introduzca número(s), O)tro, o F)in > 
 ```
-Y nos quedamos con la key: *9E7BEEE532BE0469*
+Y nos quedamos con la key: ***9E7BEEE532BE0469***
 ```
 madandy@toyota-hilux:~/Descargas$ 
 gpg --keyserver pgp.rediris.es --recv-keys 9E7BEEE532BE0469
@@ -547,7 +538,7 @@ gpg:               importadas: 1
 
 ```
 
-Y vamos a listarla  aver si esta:
+Y vamos a listarla pata ver si esta:
 
 ```
 madandy@toyota-hilux:~/Descargas$ 
@@ -566,7 +557,7 @@ sub   rsa3072 2024-12-12 [E] [caduca: 2026-12-12]
 
 
 ```
-Y como podemos ver, la clave de Alejandro ha vuelto a ser importada satisfactoriamente a nuestro keyring y ya podemos volver a hacer uso de la misma para cifrar ficheros.
+Y como podemos ver, la clave de Alejandro ha vuelto a ser importada satisfactoriamente a nuestro ***keyring*** y ya podemos volver a hacer uso de la misma para cifrar ficheros.
 
 
 # Tarea 5: Cifrado asimétrico con openssl.
@@ -582,7 +573,6 @@ openssl genpkey -algorithm RSA -out key.pem -aes256
 .................+...+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*.+.+...+..+...+......+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*..+..+.+.....+....+..+.........+.......+.....+...+.........+.+...........+...+...+....+...+...........+.+...+.....+.......+..............+.+...+........+....+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Enter PEM pass phrase:
 Verifying - Enter PEM pass phrase:
-
 ```
 Tras habernos preguntado en dos ocasiones la frase de paso que queremos utilizar, el par de claves habrá sido generado en un fichero .pem, pero para verificarlo, vamos a listar el contenido del directorio actual con el comando ls:
 
@@ -593,24 +583,24 @@ alejandro_alf.asc              Descargas        gems      iso      Nextcloud    
 andres_amg.asc                 Documentos       GNS3      kernel   oracle_vbox_2016.asc  prueba.txt  themes
 archivo_cifrado_de_andres.gpg  Escritorio       homebrew  key.pem  Plantillas            Público     vagrant
 archivo.txt                    examen24-25.sql  Imágenes  Música   Plan-v2.pdf           Servicios   Vídeos
-
 ```
 
-Y como podemos ver, así ha sido. El par de claves se ha generado correctamente con nombre key.pem.
+Y como podemos ver, así ha sido. El par de claves se ha generado correctamente con nombre ***key.pem***.
 
 ##  Envía tu clave pública a un compañero
 
-Dado que openssl genera el par de claves (tanto privada como pública) en un mismo fichero, tendremos que llevar a cabo la extracción de la clave pública para enviársela a nuestro compañero, ya que no es un procedimiento seguro el enviar el fichero directamente. Para ello, haremos uso de la opción -in <pardeclaves> para indicar el par de claves del que queremos extraer la clave pública, junto con la opción -pubout para indicar que extraiga la clave pública y la opción -out <ficherosalida> para extraer la clave a un fichero .public.pem. Además, tendremos que indicar el algoritmo, en este caso, rsa. En este caso, el pardeclaves será key.pem y el ficherosalida será key.public.pem. El comando a ejecutar sería:
+Dado que openssl genera el par de claves (tanto privada como pública) en un mismo fichero, tendremos que llevar a cabo la extracción de la clave pública para enviársela a nuestro compañero, ya que no es un procedimiento seguro el enviar el fichero directamente. Para ello, haremos uso de la opción ***-in <pardeclaves>*** para indicar el par de claves del que queremos extraer la clave pública, junto con la opción -pubout para indicar que extraiga la clave pública y la opción ***-out <ficherosalida>*** para extraer la clave a un fichero .public.pem. Además, tendremos que indicar el algoritmo, en este caso, rsa. En este caso, el pardeclaves será key.pem y el ficherosalida será key.public.pem. 
+
+El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
 sudo openssl rsa -in key.pem -pubout -out key.public.pem
 Enter pass phrase for key.pem:
 writing RSA key
-
 ```
 
-Nos ha solicitado la frase de paso y a continuación ha generado el fichero con la clave pública. Para verificarlo, vamos a leer el contenido haciendo uso del comando cat <fichero>:
+Nos ha solicitado la frase de paso y a continuación ha generado el fichero con la clave pública. Para verificarlo, vamos a leer el contenido haciendo uso del comando ***cat <fichero>***:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -624,7 +614,6 @@ io0SV2PZoFJg+rMJYT5/dpeh63eAVaTQ1rCJnqOvIX/K4jd+QR1rpXgh9DDIE3Ts
 UV1xHc0YdC5zQ3QrvNc3658aSUoXe6umPE6qMZclorleNTKEH4eDShiVfYisC6ey
 fQIDAQAB
 -----END PUBLIC KEY-----
-
 ```
 
 Efectivamente, así ha sido. La clave pública ha sido correctamente extraída, y se la enviaremos a nuetsro comapñero, y de la misma el nos la enviara.
@@ -635,14 +624,14 @@ Lo primero que tendremos que hacer será generar un fichero de texto con un dete
 
 ```echo "Esto es un fichero cifrado." > fichero.txt```
 
-Tras ello, podremos proceder a cifrar dicho fichero. Para ello, haremos uso de la opción -encrypt junto con la opción -in <fichero> para indicar el fichero a encriptar, la opción -out <ficherosalida> para indicar el fichero de salida de la encriptación (.enc), la opción -inkey <clavepublica> para indicar la clave pública con la que cifrar y la opción -pubin para indicar que vamos a firmar con una clave pública. Además, tenemos que indicar que vamos a usar RSA para firmar, verificar, cifrar o descifrar, por lo que tendremos que introducir la opción rsautl. En este caso, el fichero de entrada sería fichero.txt, el fichero de salida será fichero.enc y la clavepublica será la de Alejandro, es decir, clave.public.pem. El comando a ejecutar sería:
+Tras ello, podremos proceder a cifrar dicho fichero. Para ello, haremos uso de la opción ***-encrypt*** junto con la opción ***-in <fichero>*** para indicar el fichero a encriptar, la opción ***-out <ficherosalida>*** para indicar el fichero de salida de la encriptación (.enc), la opción ***-inkey <clavepublica>*** para indicar la clave pública con la que cifrar y la opción -pubin para indicar que vamos a firmar con una clave pública. Además, tenemos que indicar que vamos a usar RSA para firmar, verificar, cifrar o descifrar, por lo que tendremos que introducir la opción rsautl. En este caso, el fichero de entrada sería fichero.txt, el fichero de salida será fichero.enc y la clave pública será la de Alejandro, es decir, ***pub-liañez.pem***. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
 openssl pkeyutl -encrypt -in fichero.txt  -out fichero.enc -inkey pub-liañez.pem -pubin
-
 ```
 Verifico:
+
 ```
 madandy@toyota-hilux:~$ 
 ls
@@ -655,7 +644,8 @@ Descargas                      fichero.txt      iso       Nextcloud       prueba
 
 ##  Tu compañero te ha mandado un fichero cifrado, muestra el proceso para el descifrado
 
-Para descifrar un fichero cifrado, haremos uso de la opción -decrypt junto con la opción -in <fichero> para indicar el fichero a desencriptar, la opción -out <ficherosalida> para indicar el fichero de salida de la desencriptación y la opción -inkey <claveprivada> para indicar la clave privada con la que descifrar. Además, tenemos que indicar que vamos a usar RSA para firmar, verificar, cifrar o descifrar, por lo que tendremos que introducir la opción rsautl. En este caso, el fichero de entrada sería documento_cifrado.bin, el fichero de salida será documento_cifrado.txt y la claveprivada será la que hemos generado anteriormente, es decir, key.pem. El comando a ejecutar sería:
+Para descifrar un fichero cifrado, haremos uso de la opción ***-decrypt*** junto con la opción ****-in <fichero>**** para indicar el fichero a desencriptar, la opción ***-out <ficherosalida>***  para indicar el fichero de salida de la desencriptación y la opción ***-inkey <claveprivada>*** para indicar la clave privada con la que descifrar. Además, tenemos que indicar que vamos a usar RSA para firmar, verificar, cifrar o descifrar, por lo que tendremos que introducir la opción rsautl. En este caso, el fichero de entrada sería documento_cifrado.bin, el fichero de salida será documento_cifrado.txt y la claveprivada será la que hemos generado anteriormente, es decir, ***key.pem***. 
+El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
@@ -665,7 +655,7 @@ madandy@toyota-hilux:~$
 cat documento_cifrado.txt
 Este es un mensaje secreto.
 madandy@toyota-hilux:~$ 
-
 ```
 
 Efectivamente, el fichero ha sido correctamente desencriptado y podemos leer su contenido.
+
