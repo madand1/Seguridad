@@ -239,7 +239,7 @@ Ahora me bajo la calve publica de mi compañero Alejandro:
 
 ![Envio de clave](./img/imagecopy.png)
 
-Para importar las claves públicas de nuestro compañero haremos uso de la opción --import <fichero> de gpg. En este caso, el fichero que debemos introducir es el que acabamos de recibir, es decir, alejandro_gutierrez.asc. El comando a ejecutar sería:
+Para importar las claves públicas de nuestro compañero haremos uso de la opción --import <fichero> de gpg. En este caso, el fichero que debemos introducir es el que acabamos de recibir, es decir, alejandro_alf.asc. El comando a ejecutar sería:
 
 ```
 madandy@toyota-hilux:~$ 
