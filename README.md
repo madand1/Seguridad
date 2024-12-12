@@ -1,8 +1,4 @@
 # Seguridad
-## Apuntes de seguridad 
-
-
-
 ## Prácticas
 
 
