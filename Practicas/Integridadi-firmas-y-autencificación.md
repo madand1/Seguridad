@@ -145,7 +145,7 @@ gpg: enviando clave 1B80812C7BB9EA86 a hkp://pgp.rediris.es
 
 Para que mis compañeros puedan descargar mi clave pública, lo que debemos enviarse es  ***fingerprint*** o tambien llamada huella digital, la cual se obtiene con el siguiente comando:
 
-```gpg --fingerprint B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86``` 
+``` gpg --fingerprint B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86 ```
 
 y la cual nos da la siguiente salida por pantalla:
 
@@ -175,7 +175,7 @@ gpg:               importadas: 1
 ```
 #### 4. Firmar las claves públicas de los compañeros
 
-Procedemos a firmar las claves públicas descargadas para su validacia¡ón en nuestro anillo de confianza, de la siguiente manera ```gog --sign-key <fingerprint>```, por lo que en pantalla se vería de la siguiente manera:
+Procedemos a firmar las claves públicas descargadas para su validacia¡ón en nuestro anillo de confianza, de la siguiente manera ```gpg --sign-key <fingerprint>```, por lo que en pantalla se vería de la siguiente manera:
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
@@ -213,7 +213,7 @@ madandy@toyota-hilux:~/Documentos/SegundoASIR/security$
 gpg --armor --export -a B39722468D0599C3B62F9AEA9E7BEEE532BE0469 > alf.asc
 
 ```
-#### 6. Imprtar claves firmadas por mis compañeros
+#### 6. Importar claves firmadas por mis compañeros
 
 Cuando reciba mi clave firmada por mi compañero, la importo para incluirla en mi anillo de confianza:
 
@@ -235,21 +235,24 @@ Comprueba que mi clave pública contiene las firmas de mis compañeros:
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
-gpg --list-sigs B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86
+gpg --list-sig "Andrés Morales González"
 pub   rsa3072 2024-12-16 [SC] [caduca: 2026-12-16]
       B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86
 uid        [  absoluta ] Andrés Morales González <asirandyglez@gmail.com>
 sig 3        1B80812C7BB9EA86 2024-12-16  Andrés Morales González <asirandyglez@gmail.com>
 sig          9E7BEEE532BE0469 2024-12-17  Alejandro Liáñez Frutos <alejandroliafru@gmail.com>
+sig          5DD99C6F8D4E1C65 2024-12-18  jose antonio Canalo Gonzalez <joseantoniocgonzalez83@gmail.com>
+sig          ED45D8BE85D4DB1A 2024-12-18  Pablo Martín Hidalgo <pmartinhidalgo19@gmail.com>
 sub   rsa3072 2024-12-16 [E] [caduca: 2026-12-16]
 sig          1B80812C7BB9EA86 2024-12-16  Andrés Morales González <asirandyglez@gmail.com>
-
 ```
 Donde nos tenemos que fijar en esta salida del comando es en las siguientes líneas:
 
 ```
 sig 3        1B80812C7BB9EA86 2024-12-16  Andrés Morales González <asirandyglez@gmail.com>
 sig          9E7BEEE532BE0469 2024-12-17  Alejandro Liáñez Frutos <alejandroliafru@gmail.com>
+sig          5DD99C6F8D4E1C65 2024-12-18  jose antonio Canalo Gonzalez <joseantoniocgonzalez83@gmail.com>
+sig          ED45D8BE85D4DB1A 2024-12-18  Pablo Martín Hidalgo <pmartinhidalgo19@gmail.com>
 ```
 
 ### Muestra las firmas que tiene tu clave pública
