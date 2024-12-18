@@ -222,7 +222,7 @@ Exporta las claves públicas que firmaste y envíalas de vuelta a sus propietari
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
 gpg --armor --export -a B39722468D0599C3B62F9AEA9E7BEEE532BE0469 > alf.asc
-
+Comprueba que puedes verificar con confianza una firma de una persona en las que no confías, pero sin embargo si confía otra persona en la que tu tienes confianza total.
 ```
 
 La misma operación he realizado con mis compañeros mencionados anteriormente.
@@ -290,7 +290,7 @@ gpg: Firma correcta de "Alejandro Liáñez Frutos <alejandroliafru@gmail.com>" [
 
 Para esta ocasión lo que haremos sera la instalación de ***Thunderbird***, con el siguiente comando:
 
-````sudo apt install thunderbird-l10n-es-es -y```
+```sudo apt install thunderbird-l10n-es-es -y```
 
 Y como podemos ver lo tenemos ya instalado, gracias al comando anteriormente mencionado:
 
