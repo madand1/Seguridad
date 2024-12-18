@@ -120,6 +120,15 @@ pub   rsa3072 2024-12-16 [SC] [caduca: 2026-12-16]
 uid        [  absoluta ] Andrés Morales González <asirandyglez@gmail.com>
 sub   rsa3072 2024-12-16 [E] [caduca: 2026-12-16]
 ```
+### ¿Qué significa el mensaje que aparece en el momento de verificar la firma?
+
+```
+ gpg: Firma correcta de "Pepe D <josedom24@gmail.com>" [desconocido]
+ gpg: ATENCIÓN: ¡Esta clave no está certificada por una firma de confianza!
+ gpg:          No hay indicios de que la firma pertenezca al propietario.
+ Huellas dactilares de la clave primaria: E8DD 5DA9 3B88 F08A DA1D  26BF 5141 3DDB 0C99 55FC
+```
+El mensaje muestra que la firma digital del archivo o mensaje es válida y corresponde a la clave asociada a "Pepe D josedom24@gmail.com", pero también advierte que no se puede asegurar que esa clave pertenezca realmente a esa persona porque no está certificada como confiable. Esto ocurre porque no he validado la clave ni hay una cadena de confianza que lo respalde. Para confirmar su autenticidad, puedo verificar manualmente la huella dactilar con el propietario, y si confío en ella, marcarla como confiable en mi sistema.
 
 ### Crea un anillo de confianza entre los miembros de la clase.
 
@@ -133,6 +142,7 @@ Gracias a este mecanismo, si confiamos en alguien que nos envió su clave públi
 ### Pasos para crear un anillo de confianza
 
 #### 1. Subir mi clave pública a un servidor de claves
+
 El primer paso es subir tu clave pública a un servidor de claves, en este caso lo subiremos a ```pgp.rediris.es```, de la siguiente manera:
 
 ```
@@ -145,19 +155,17 @@ gpg: enviando clave 1B80812C7BB9EA86 a hkp://pgp.rediris.es
 
 Para que mis compañeros puedan descargar mi clave pública, lo que debemos enviarse es  ***fingerprint*** o tambien llamada huella digital, la cual se obtiene con el siguiente comando:
 
-``` gpg --fingerprint B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86 ```
+``` gpg --fingerprint Andrés Morales González ```
 
 y la cual nos da la siguiente salida por pantalla:
 
 ```
-madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
-gpg --fingerprint B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86
+madandy@toyota-hilux:~/Documentos/SegundoASIR/github/Seguridad$ 
+gpg --fingerprint "Andrés Morales González"
 pub   rsa3072 2024-12-16 [SC] [caduca: 2026-12-16]
       B7E8 22D8 FB45 BD8B AF2F  3156 1B80 812C 7BB9 EA86
 uid        [  absoluta ] Andrés Morales González <asirandyglez@gmail.com>
 sub   rsa3072 2024-12-16 [E] [caduca: 2026-12-16]
-
-
 ```
 
 De esto que nos aparece en pantalla nos quedaremos con la línea que esta entre ***pub*** y ***uid**** y es lo que le mandaremos a nuestro compañero.
@@ -173,6 +181,8 @@ gpg: clave 9E7BEEE532BE0469: clave pública "Alejandro Liáñez Frutos <alejandr
 gpg: Cantidad total procesada: 1
 gpg:               importadas: 1
 ```
+
+
 #### 4. Firmar las claves públicas de los compañeros
 
 Procedemos a firmar las claves públicas descargadas para su validacia¡ón en nuestro anillo de confianza, de la siguiente manera ```gpg --sign-key <fingerprint>```, por lo que en pantalla se vería de la siguiente manera:
@@ -203,6 +213,7 @@ con su clave: "Andrés Morales González <asirandyglez@gmail.com>" (1B80812C7BB9
 ¿Firmar de verdad? (s/N) s
 
 ```
+He hecho lo mismo con mis compañeros ***Pablo Martín Hidalgo*** y ***Jose Antonio Canalo González***, pero no lo he puesto porque el procedimiento es el mismo.
 
 #### 5. Exportar y enviar las claves firmadas
 
@@ -213,9 +224,12 @@ madandy@toyota-hilux:~/Documentos/SegundoASIR/security$
 gpg --armor --export -a B39722468D0599C3B62F9AEA9E7BEEE532BE0469 > alf.asc
 
 ```
+
+La misma operación he realizado con mis compañeros mencionados anteriormente.
+
 #### 6. Importar claves firmadas por mis compañeros
 
-Cuando reciba mi clave firmada por mi compañero, la importo para incluirla en mi anillo de confianza:
+Cuando reciba mi clave firmada por mi compañero, la importo para incluirla en mi anillo de confianza, obviamente tengo que importar con anterioridad la de ellos, para que sirva la firma.
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
