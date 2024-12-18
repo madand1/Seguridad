@@ -1,6 +1,6 @@
 # Integridad, firmas y autenticación
 
-Si vas a empezar esta práctica debes de tener los conceptos claros que explico en este [documento](./Practicas/Cifadro-Asimétrico.md), ya que sin este no podrás realizar esta práctica.
+Si vas a empezar esta práctica debes de tener los conceptos claros que explico en este [documento](Cifadro-Asimétrico.md), ya que sin este no podrás realizar esta práctica.
 
 ## Tarea 1: Firmas electrónicas
 
@@ -255,7 +255,6 @@ sig          5DD99C6F8D4E1C65 2024-12-18  jose antonio Canalo Gonzalez <joseanto
 sig          ED45D8BE85D4DB1A 2024-12-18  Pablo Martín Hidalgo <pmartinhidalgo19@gmail.com>
 ```
 
-### Muestra las firmas que tiene tu clave pública
 
 ### Comprueba que ya puedes verificar sin “problemas” una firma recibida por una persona en la que confías.
 
