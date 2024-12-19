@@ -284,6 +284,134 @@ gpg: Firma correcta de "Alejandro Liáñez Frutos <alejandroliafru@gmail.com>" [
 ```
 ### Comprueba que puedes verificar con confianza una firma de una persona en las que no confías, pero sin embargo si confía otra persona en la que tu tienes confianza total.
 
+Para esta parte del trabajo le he tenido que pedir una cuarta firma en mi clave pública a mi compañero ***Juan Antonio Pineda Amador***, la cual me ha pasado por correo, los pasos que he seguido han sido los siguientes:
+
+1. Exportar mi clave pública.
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
+gpg --armor --export -a "Andrés Morales González" > andy-and1.asc
+
+```
+
+2. Importar la clave pública de mi compañero.
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
+gpg --import javi_huete.asc 
+gpg: key 6E42360E895488ED: 3 firmas no comprobadas por falta de claves
+gpg: clave 6E42360E895488ED: clave pública "Francisco Javier Huete Mejías <fjhuete.m@gmail.com>" importada
+gpg: Cantidad total procesada: 1
+gpg:               importadas: 1
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: nivel: 0  validez:   1  firmada:   3  confianza: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: nivel: 1  validez:   3  firmada:   0  confianza: 3-, 0q, 0n, 0m, 0f, 0u
+gpg: siguiente comprobación de base de datos de confianza el: 2025-12-18
+
+```
+3. Firmar la clave pública de mi compañero.
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
+gpg --sign-key "Juan Antonio Pineda Amador"
+
+pub  rsa3072/D30D0B7E734FCF74
+     creado: 2024-12-13  caduca: 2026-12-13  uso: SC  
+     confianza: desconocido   validez: desconocido
+sub  rsa3072/BC028BCC730037FF
+     creado: 2024-12-13  caduca: 2026-12-13  uso: E   
+[desconocida] (1). Juan Antonio Pineda Amador <juanantpiama@gmail.com>
+
+
+pub  rsa3072/D30D0B7E734FCF74
+     creado: 2024-12-13  caduca: 2026-12-13  uso: SC  
+     confianza: desconocido   validez: desconocido
+ Huella clave primaria: 97AA B306 BAF9 F7A0 600C  9F7C D30D 0B7E 734F CF74
+
+     Juan Antonio Pineda Amador <juanantpiama@gmail.com>
+
+Esta clave expirará el 2026-12-13.
+¿Está realmente seguro de querer firmar esta clave
+con su clave: "Andrés Morales González <asirandyglez@gmail.com>" (1B80812C7BB9EA86)?
+
+¿Firmar de verdad? (s/N) s
+
+```
+4. Editamos la clave de mi compañera con que confiamos plenamente en él.
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
+gpg --edit-key "Juan Antonio Pineda Amador"
+gpg (GnuPG) 2.2.40; Copyright (C) 2022 g10 Code GmbH
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+
+gpg: comprobando base de datos de confianza
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: nivel: 0  validez:   1  firmada:   4  confianza: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: nivel: 1  validez:   4  firmada:   0  confianza: 4-, 0q, 0n, 0m, 0f, 0u
+gpg: siguiente comprobación de base de datos de confianza el: 2025-12-18
+pub  rsa3072/D30D0B7E734FCF74
+     creado: 2024-12-13  caduca: 2026-12-13  uso: SC  
+     confianza: desconocido   validez: total
+sub  rsa3072/BC028BCC730037FF
+     creado: 2024-12-13  caduca: 2026-12-13  uso: E   
+[   total   ] (1). Juan Antonio Pineda Amador <juanantpiama@gmail.com>
+
+gpg> trust 
+pub  rsa3072/D30D0B7E734FCF74
+     creado: 2024-12-13  caduca: 2026-12-13  uso: SC  
+     confianza: desconocido   validez: total
+sub  rsa3072/BC028BCC730037FF
+     creado: 2024-12-13  caduca: 2026-12-13  uso: E   
+[   total   ] (1). Juan Antonio Pineda Amador <juanantpiama@gmail.com>
+
+Por favor, decida su nivel de confianza en que este usuario
+verifique correctamente las claves de otros usuarios (mirando
+pasaportes, comprobando huellas dactilares en diferentes fuentes...)
+
+
+  1 = No lo sé o prefiero no decirlo
+  2 = NO tengo confianza
+  3 = Confío un poco
+  4 = Confío totalmente
+  5 = confío absolutamente
+  m = volver al menú principal
+
+¿Su decisión? 5
+¿De verdad quiere asignar absoluta confianza a esta clave? (s/N) s
+
+pub  rsa3072/D30D0B7E734FCF74
+     creado: 2024-12-13  caduca: 2026-12-13  uso: SC  
+     confianza: absoluta      validez: total
+sub  rsa3072/BC028BCC730037FF
+     creado: 2024-12-13  caduca: 2026-12-13  uso: E   
+[   total   ] (1). Juan Antonio Pineda Amador <juanantpiama@gmail.com>
+Ten en cuenta que la validez de clave mostrada no es necesariamente
+correcta a menos de que reinicies el programa.
+
+gpg> quit
+```
+
+5. Exportar la clave de mi compañero ya firmada para que pueda unirla a su anillo.
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
+gpg --armor --export -a "Francisco Javier Huete Mejías" > fjhm.asc
+```
+
+Como ***Juan Antonio Pineda*** le ha dado a su vez su clave a ***Alejandro Herrera Jiménez***, y este a a mi, por lo que yo tengo confianza completa en la clave de ***Juan Antonio Pineda Amador***
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
+gpg --verify parapineda.txt.sig parapineda.txt
+gpg: Firmado el dom 15 dic 2024 14:08:22 CET
+gpg:                usando RSA clave 04338BE234F189A13D276B85D7A7A7D08CE3107B
+gpg: Firma correcta de "Alejandro Herrera Jiménez <alejandroherrera140697@gmail.com>" [total]
+
+```
+
 ## Tarea 2: Correo seguro con evolution/thunderbird
 
 ### Configura el cliente de correo evolution/thunderbird con tu cuenta de correo habitual.
