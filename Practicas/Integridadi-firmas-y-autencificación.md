@@ -408,7 +408,7 @@ madandy@toyota-hilux:~/Documentos/SegundoASIR/security$
 gpg --verify parapineda.txt.sig parapineda.txt
 gpg: Firmado el dom 15 dic 2024 14:08:22 CET
 gpg:                usando RSA clave 04338BE234F189A13D276B85D7A7A7D08CE3107B
-gpg: Firma correcta de "Alejandro Herrera Jiménez <alejandroherrera140697@gmail.com>" [absoluta]
+gpg: Firma correcta de "Alejandro Herrera Jiménez <alejandroherrera140697@gmail.com>" [total]
 ```
 
 ## Tarea 2: Correo seguro con evolution/thunderbird
