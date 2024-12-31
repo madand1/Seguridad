@@ -206,3 +206,23 @@ O6MkXt43+M2hCSGO7CGLG/nfkaXGDIHIERIO7ntzuEAy1q2BZfbwd0dtoog3a6/b
 - Validación de firmas digitales: Permite que otros validen la autenticidad de los documentos firmados digitalmente con la clave privada correspondiente.
 
 - Interoperabilidad en sistemas: Algunos sistemas requieren el archivo de clave pública en formato PEM para integrarse o autenticar al usuario.
+
+## Tarea 2: Validación del certificado
+Lo primero que haremos será instalar autofirma, para ello nos dirigiremos a su [página](https://firmaelectronica.gob.es/Home/Descargas.htm) y nos descargamos su instalador, una vez instalado, abriremos la aplicación y nos pedira que instroduzcamos la contraseña de nuestro certificado. Una vez introducida, nos pedirá que introduzcamos la contraseña de nuestro certificado para poder instarlo.
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+Para validar el certificado que acabamos de instalar, vamos a hacer uso de la utilidad [VALIDe](https://valide.redsara.es/valide/) que nos proporciona el Gobierno de España. Por lo que, vamos a acceder al apartado [Validar Certificado](https://valide.redsara.es/valide/validarCertificado/ejecutar.html) y una vez pulsado el **Seleccionar Certificado**, se nos abre una ventana emergente para seleccionar el certificado que queremos validar.
+
+![alt text](image-4.png)
+
+![alt text](image-7.png)
+
+y si le damos a ampliar información, podemos observar lo siguiente:
+
+![alt text](image-8.png)
