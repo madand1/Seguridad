@@ -199,7 +199,8 @@ O6MkXt43+M2hCSGO7CGLG/nfkaXGDIHIERIO7ntzuEAy1q2BZfbwd0dtoog3a6/b
 
 ```
 
-PPara qué sirve este proceso?
+¿Para qué sirve este proceso?
+
 - Compartición segura: La clave pública puede compartirse libremente para que terceros cifren mensajes o verifiquen firmas realizadas por el titular del certificado.
 
 - Validación de firmas digitales: Permite que otros validen la autenticidad de los documentos firmados digitalmente con la clave privada correspondiente.
