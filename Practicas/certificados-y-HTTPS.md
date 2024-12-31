@@ -134,7 +134,7 @@ Donde:
 - ```file```: Define el archivo de salida donde se almacenará la clave pública.
 - ```rfc```: Genera la salida en formato Base64 compatible con PEM.
 
-y si lo hacemos por pantalla veremos lo siguinte:
+Y si lo hacemos por pantalla veremos lo siguinte:
 
 ```madandy@toyota-hilux:~/Documentos/certificado-digital/tarea1$ 
 keytool -exportcert -keystore certificado.jks -alias morales_gonzalez_andres___49134204v_sdc_1_2_18_a -file clave-publica.pem -rfc
@@ -147,7 +147,8 @@ El almacén de claves JKS utiliza un formato propietario. Se recomienda migrar a
 
 4. Verificamos el contenmido del archivo que hemos exportado
 
-con el comando ```cat calve-publica.pem```
+Para ello nos ayudaremos del comando ```cat calve-publica.pem```
+
 Lo que vemos por pantalla:
 
 ```
@@ -199,34 +200,34 @@ O6MkXt43+M2hCSGO7CGLG/nfkaXGDIHIERIO7ntzuEAy1q2BZfbwd0dtoog3a6/b
 
 ```
 
-¿Para qué sirve este proceso?
+### ¿Para qué sirve este proceso?
 
-- Compartición segura: La clave pública puede compartirse libremente para que terceros cifren mensajes o verifiquen firmas realizadas por el titular del certificado.
+- **Compartición segura**: La clave pública puede compartirse libremente para que terceros cifren mensajes o verifiquen firmas realizadas por el titular del certificado.
 
-- Validación de firmas digitales: Permite que otros validen la autenticidad de los documentos firmados digitalmente con la clave privada correspondiente.
+- **Validación de firmas digitales**: Permite que otros validen la autenticidad de los documentos firmados digitalmente con la clave privada correspondiente.
 
-- Interoperabilidad en sistemas: Algunos sistemas requieren el archivo de clave pública en formato PEM para integrarse o autenticar al usuario.
+- **Interoperabilidad en sistemas**: Algunos sistemas requieren el archivo de clave pública en formato PEM para integrarse o autenticar al usuario.
 
 ## Tarea 2: Validación del certificado
 
 Lo primero que haremos será instalar **AutoFirma**, para ello nos dirigiremos a su [página](https://firmaelectronica.gob.es/Home/Descargas.htm) y nos descargamos su instalador (en nuestro caso será para **Debian**), una vez instalado, [abriremos la aplicación](autofirma.md) y nos pedira que instroduzcamos la contraseña de nuestro certificado. Una vez introducida, nos pedirá que introduzcamos la contraseña de nuestro certificado para poder instarlo.
 
-![alt text](image.png)
+![alt text](./img/image1.png)
 
-![alt text](image-1.png)
+![alt text](./img/image-1.png)
 
-![alt text](image-2.png)
+![alt text](./img/image-2.png)
 
-![alt text](image-3.png)
+![alt text](./img/image-3.png)
 
 
 Para validar el certificado que acabamos de instalar, vamos a hacer uso de la utilidad [VALIDe](https://valide.redsara.es/valide/) que nos proporciona el Gobierno de España. Por lo que, vamos a acceder al apartado [Validar Certificado](https://valide.redsara.es/valide/validarCertificado/ejecutar.html) y una vez pulsado el **Seleccionar Certificado**, se nos abre una ventana emergente para seleccionar el certificado que queremos validar.
 
-![alt text](image-4.png)
+![alt text](./img/image-4.png)
 
-![alt text](image-7.png)
+![alt text](./img/image-7.png)
 
 Y si le damos a **Ver información ampliada**, nos mostrará lo siguiente:
 
-![alt text](image-8.png)
+![alt text](./img/image-8.png)
 
