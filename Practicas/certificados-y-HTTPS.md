@@ -208,7 +208,8 @@ O6MkXt43+M2hCSGO7CGLG/nfkaXGDIHIERIO7ntzuEAy1q2BZfbwd0dtoog3a6/b
 - Interoperabilidad en sistemas: Algunos sistemas requieren el archivo de clave pública en formato PEM para integrarse o autenticar al usuario.
 
 ## Tarea 2: Validación del certificado
-Lo primero que haremos será instalar autofirma, para ello nos dirigiremos a su [página](https://firmaelectronica.gob.es/Home/Descargas.htm) y nos descargamos su instalador, una vez instalado, abriremos la aplicación y nos pedira que instroduzcamos la contraseña de nuestro certificado. Una vez introducida, nos pedirá que introduzcamos la contraseña de nuestro certificado para poder instarlo.
+
+Lo primero que haremos será instalar **AutoFirma**, para ello nos dirigiremos a su [página](https://firmaelectronica.gob.es/Home/Descargas.htm) y nos descargamos su instalador (en nuestro caso será para **Debian**), una vez instalado, [abriremos la aplicación](autofirma.md) y nos pedira que instroduzcamos la contraseña de nuestro certificado. Una vez introducida, nos pedirá que introduzcamos la contraseña de nuestro certificado para poder instarlo.
 
 ![alt text](image.png)
 
@@ -228,3 +229,4 @@ Para validar el certificado que acabamos de instalar, vamos a hacer uso de la ut
 Y si le damos a **Ver información ampliada**, nos mostrará lo siguiente:
 
 ![alt text](image-8.png)
+
