@@ -217,12 +217,14 @@ Lo primero que haremos será instalar autofirma, para ello nos dirigiremos a su 
 ![alt text](image-2.png)
 
 ![alt text](image-3.png)
+
+
 Para validar el certificado que acabamos de instalar, vamos a hacer uso de la utilidad [VALIDe](https://valide.redsara.es/valide/) que nos proporciona el Gobierno de España. Por lo que, vamos a acceder al apartado [Validar Certificado](https://valide.redsara.es/valide/validarCertificado/ejecutar.html) y una vez pulsado el **Seleccionar Certificado**, se nos abre una ventana emergente para seleccionar el certificado que queremos validar.
 
 ![alt text](image-4.png)
 
 ![alt text](image-7.png)
 
-y si le damos a ampliar información, podemos observar lo siguiente:
+Y si le damos a **Ver información ampliada**, nos mostrará lo siguiente:
 
 ![alt text](image-8.png)
