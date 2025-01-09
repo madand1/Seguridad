@@ -6,6 +6,7 @@ Para la realización de esta práctica recomiendo que se haga una lectura de los
 - [Integridad, firmas y autentificación](Seguridad/Practicas/Integridadi-firmas-y-autencificación.md)
 
 Ya que estos tendrán un tema importante en esta parte, pero al haberlo tratado en profundidad anteriormente, vamos a obviar ciertos aspectos o pasos.
+## Certificado digital de persona física
 
 ## Introducción
 
@@ -230,4 +231,309 @@ Para validar el certificado que acabamos de instalar, vamos a hacer uso de la ut
 Y si le damos a **Ver información ampliada**, nos mostrará lo siguiente:
 
 ![alt text](./img/image-8.png)
+
+## Tarea 3: Firma electrónica
+
+1. Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.
+
+Para esto lo que vamos a crear dos documentos, cada uno para una función:
+
+- Uno para la comprobación de la página VALIDe.
+- Otro documento para la aplicación de autofirma.
+
+Asi que vamos a hacerlo con un archivo con extensión **txt**, en este caso serán de la siguiente manera:
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/github/Seguridad/Practicas/documentos-para-tarea3$ 
+echo "Hola. Como vas?. Hace tiempo no se de ti. Esto es una prueba de VALIDe." > valide.txt
+madandy@toyota-hilux:~/Documentos/SegundoASIR/github/Seguridad/Practicas/documentos-para-tarea3$ 
+echo "Hola. Como vas?. Hace tiempo no se de ti. Esto es una prueba de AutoFirma." > autofirma.txt
+
+```
+
+Estan creado en el siguiente directorio: ```/home/madandy/Documentos/SegundoASIR/github/Seguridad/Practicas/documentos-para-tarea3```
+
+Como podemos ver aqui:
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/github/Seguridad/Practicas/documentos-para-tarea3$ 
+ls
+autofirma.txt  valide.txt
+```
+
+Y su contenido como hicimos anteriormente con el comando ```echo```, es :
+
+```
+madandy@toyota-hilux:~/Documentos/SegundoASIR/github/Seguridad/Practicas/documentos-para-tarea3$ 
+cat valide.txt 
+Hola. Como vas?. Hace tiempo no se de ti. Esto es una prueba de VALIDe.
+madandy@toyota-hilux:~/Documentos/SegundoASIR/github/Seguridad/Practicas/documentos-para-tarea3$ 
+cat autofirma.txt 
+Hola. Como vas?. Hace tiempo no se de ti. Esto es una prueba de AutoFirma.
+```
+
+Una vez hemos creado los documentos, y hemos revisado su contenido, lo que tendremos que hacer es firmarlos tanto con **VALIDe** como con **AutoFirma**, correspondientemente, de la siguiente manera:
+
+# POr aqui me quede!!!!!
+
+
+2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
+3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
+
+## HTTPS / SSL
+
+![Portada](./img/ssl-vs-https3.png)
+
+### Introducción 
+
+Voy a realizar esta práctica con mi compañero **Alejandro Liañez Frutos** ya que para esta parte de la práctica necesito la colaboración de un compañera, ya que firmaré una **Autoridad Certificadora** y mi compañero la firmará, y al contrario.
+
+Para este caso voy a hacer uso de una máquina de **OpenStack**, con la siguiente **ip** ```172.22.200.139```:
+
+![Máquina para hacer certificadora](./img/cripto-bro.png)
+
+Una vez dentro de la máquina llamada **Cripto** vamos a comenzar a hacer esta práctica.
+
+La página la he hecho de la siguiente manera explicada en el siguiente [post](./pagina.md)
+
+### Creación de Autoridad Certificadora
+
+1. **Crear su autoridad certificadora (generar el certificado digital de la CA). Mostrar el fichero de configuración de la AC.**
+
+- Creamos el directorio donde alojaremos todo lo necesario para la **CA** , dandole los permisos necesarios.
+
+```
+debian@cripto:~$ mkdir CA
+debian@cripto:~$ cd CA/
+debian@cripto:~$ mkdir certs csr crl newcerts private
+debian@cripto:~/CA$ chmod 700 private
+debian@cripto:~/CA$ touch index.txt
+debian@cripto:~/CA$  touch index.txt.attr
+debian@cripto:~/CA$ echo 1000 > serial
+debian@cripto:~/CA$ tree
+.
+├── certs
+├── crl
+├── csr
+├── index.txt
+├── index.txt.attr
+├── newcerts
+├── private
+└── serial
+
+6 directories, 3 files
+
+```
+- Ahora a continuación lo que hare será crear las variables de entorno donde voy a definir los datos de configuracion de la **CA**:
+
+Para esto tendremos que meterlo en el final de ``.bashrc``, meteremos lo siguiente:
+
+```
+# Variables de entorno para la practica
+
+export countryName_default="ES"
+export stateOrProvinceName_default="Sevilla"
+export localityName_default="Dos Hermanas"
+export organizationName_default="Andrés"
+export organizationalUnitName_default="ASIR2"
+export emailAddress_default="asirandyglez@gmail.com"
+export DIR_CA="$HOME/CA"
+
+```
+
+Y agregamos estas variables con un ``source .bashrc``
+
+Ahora crearemos el fichero de configuración el cual vamos a llamar ``openssl.cnf``, y tendra el siguiente contenido:
+
+```
+# man ca
+default_ca = CA_default
+
+[ CA_default ]
+# Directory and file locations
+dir               = /home/debian/CA
+certs             = $dir/certs
+crl_dir           = $dir/crl
+new_certs_dir     = $dir/newcerts
+database          = $dir/index.txt
+serial            = $dir/serial
+RANDFILE          = $dir/private/.rand
+
+# The root key and root certificate
+private_key       = $dir/private/private.key
+certificate       = $dir/certs/cacert.crt
+
+# For certificate revocation lists
+crlnumber         = $dir/crlnumber
+crl               = $dir/crl/ca.crl.pem
+crl_extensions    = crl_ext
+default_crl_days  = 30
+
+# SHA-1 is deprecated, so use SHA-2 instead
+default_md        = sha256
+
+# Certificate options
+name_opt          = ca_default
+cert_opt          = ca_default
+default_days      = 375
+preserve          = no
+policy            = policy_strict
+
+[ policy_strict ]
+countryName             = match
+stateOrProvinceName     = match
+organizationName        = match
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ policy_loose ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+string_mask         = utf8only
+default_md          = sha256
+x509_extensions     = v3_ca
+req_extensions      = v3_req
+
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+# subjectAltName = $ENV::SAN
+
+[ req_distinguished_name ]
+countryName                     = Country Name (2 letter code)
+stateOrProvinceName             = State or Province Name
+localityName                    = Locality Name
+0.organizationName              = Organization Name
+organizationalUnitName          = Organizational Unit Name
+commonName                      = Common Name
+emailAddress                    = Email Address
+
+countryName_default             = ES
+stateOrProvinceName_default     = Sevilla
+localityName_default            = Dos Hermanas
+0.organizationName_default      = Andrés
+organizationalUnitName_default  = ASIR2
+emailAddress_default            = asirandyglez@gmail.com
+
+[ v3_ca ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints = critical, CA:true
+keyUsage = critical, digitalSignature, cRLSign, keyCertSign
+
+[ server_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+
+[ usr_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth, emailProtection
+
+[ crl_ext ]
+authorityKeyIdentifier = keyid:always
+
+[ ocsp ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, digitalSignature
+extendedKeyUsage = critical, OCSPSigning
+
+```
+
+- Ahora creare tanto la clave como el certificado de **AC** (Autoridad certifficadora) con el siguiente comado:
+
+1. **Creación de la clave privada (Generación de clave RSA para la Autoridad Certficadora):**
+```
+debian@cripto:~/CA$ openssl genrsa -aes256 -out private/private.key 4096
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+
+```
+Donde:
+
+- ``openssl`` genrsa: Este comando genera una clave privada RSA 
+- ``-aes256``: Indica que la clave privada debe ser cifrada con el algoritmo AES-256, lo que añade una capa extra de seguridad al proteger la clave con una contraseña. 
+- ``-out private/private.key``: Especifica la ubicación donde se guardará la clave privada generada, en este caso en el archivo private/private.key
+- ``4096``: Define el tamaño de la clave privada en bits. 
+
+Por lo que se guarda el archivo ``private/private.key``
+
+2. **Creación del certificado autofirmado de la Autoridad Certificadora (AC)**
+
+Para hacer esto, tenemos que estar en el directorio donde se encuentre ``openssl.cnf``, y una vez en ese directorio, vamos a crearlo:
+
+```
+debian@cripto:~/CA$ openssl req -config ./openssl.cnf -key private/private.key -new -x509 -days 3650 -sha256 -out certs/andy.crt
+Enter pass phrase for private/private.key:
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [ES]:
+State or Province Name [Sevilla]:
+Locality Name [Dos Hermanas]:
+Organization Name [Andrés]:
+Organizational Unit Name [ASIR2]:
+Common Name []:
+Email Address [asirandyglez@gmail.com]:
+```
+
+Donde:
+
+- ``openssl req``: Este comando se utiliza para crear una Solicitud de Certificado (CSR) o un certificado autofirmado. Aquí se está creando un certificado autofirmado, ya que la opción -x509 se usa para ello.
+
+- ``-config ./openssl.cnf``: Este parámetro especifica el archivo de configuración de OpenSSL que se utilizará, en este caso, openssl.cnf, que contiene configuraciones predeterminadas como las ubicaciones de archivos y parámetros para la generación del certificado.
+
+- ``-key private/private.key``: Especifica la clave privada que se utilizará para firmar el certificado. En este caso, se usa la clave privada que generaste previamente, ubicada en private/private.key.
+
+- ``-new``: Indica que se está creando un nuevo certificado. Esto es parte de la creación de la solicitud de certificado (CSR).
+
+- ``-x509``: Indica que se debe generar un certificado autofirmado (en lugar de solo una CSR). Este certificado es firmado por la propia Autoridad Certificadora (AC), que eres tú en este caso.
+
+- ``-days 3650``: Establece la duración del certificado en días. En este caso, se está creando un certificado que será válido durante 10 años (3650 días).
+
+- ``-sha256``: Indica que se debe usar el algoritmo de hash SHA-256 para firmar el certificado. SHA-256 es parte de la familia de funciones de hash SHA-2 y es una opción estándar para la firma de certificados, ofreciendo un alto nivel de seguridad.
+
+- ``-out certs/andy.crt``: Especifica el archivo de salida donde se guardará el certificado generado, en este caso en certs/andy.crt.
+
+Y como podemos ver lo tenemos en sus directorios:
+
+```
+debian@cripto:~/CA$ tree
+.
+├── certs
+│   └── andy.crt
+├── crl
+├── csr
+├── index.txt
+├── index.txt.attr
+├── newcerts
+├── openssl.cnf
+├── private
+│   └── private.key
+└── serial
+
+6 directories, 6 files
+
+```
 
