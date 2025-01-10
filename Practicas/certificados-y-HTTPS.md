@@ -298,6 +298,18 @@ La página la he hecho de la siguiente manera explicada en el siguiente [post](.
 
 ### Creación de Autoridad Certificadora
 
+El primer paso que vamos a  hacer es egenerar un directorio en el que ubicaremos nuestra entidad certificadora, cuya finalidad es mantener una organización, por lo que el nombre que va a a tener es **CA/**, y este tendrá distintos directorios:
+
+- **certs**: En dicho directorio se almacenarán los certificados firmados.
+- **crs**: En dicho directorio se almacenarán los ficheros de solicitud de firma de certificados (CSR).
+- **crl**: En dicho directorio se almacenará la lista de certificados que han sido revocados (CRL).
+- **private**: En dicho directorio se almacenará la clave privada de la autoridad certificadora.
+
+A parte del directorio y sus subdirectorios, necesitare en el directorio **CA/** un fichero el cual vamos a llamar **index.txt**, que va a actuar como bases de datis para los certificados existente.
+
+
+Ahora haremos una series de paso que será los siguientes que no piden en las preguntas de la práctica:
+
 1. **Crear su autoridad certificadora (generar el certificado digital de la CA). Mostrar el fichero de configuración de la AC.**
 
 - Creamos el directorio donde alojaremos todo lo necesario para la **CA** , dandole los permisos necesarios.
@@ -346,7 +358,7 @@ Y agregamos estas variables con un ``source .bashrc``
 Ahora crearemos el fichero de configuración el cual vamos a llamar ``openssl.cnf``, y tendra el siguiente contenido:
 
 ```
-# man ca
+# man
 default_ca = CA_default
 
 [ CA_default ]
@@ -576,58 +588,30 @@ Una vez comprobado, vamos a mandarselo para que nos la firme, y asi tambien que 
 
 - Firmada por **Alejandro Liañez Frutos**
 
-El cual es ``andres-firmado.crt``
+El cual es ``andres-firmado.crt`` esto lo tengo en el el siguiente directorio, ya que somos una autoridad certificadora:
+
+```
+debian@cripto:~$ ls
+CA  andres_firmado.crt  andy.csr
+
+```
 
 
 - Firmar el certificado de **Alejandro Liañez Frutos**:
 
-Para ello hare lo siguiente comando ```openssl ca -config openssl.cnf -extensions v3_req -days 3650 -notext -md sha256 -in csr/ale-no-firmado.csr -out certs/alf-firmado.crt -policy policy_loose``` y nos saldrá por pantalla lo siguiente:
-```
-debian@cripto:~/CA$ openssl ca -config openssl.cnf -extensions v3_req -days 3650 -notext -md sha256 -in csr/ale-no-firmado.csr -out certs/alf-firmado.crt -policy policy_loose
-Using configuration from openssl.cnf
-Enter pass phrase for /home/debian/CA/private/private.key:
-Check that the request matches the signature
-Signature ok
-Certificate Details:
-        Serial Number: 4096 (0x1000)
-        Validity
-            Not Before: Jan 10 09:20:45 2025 GMT
-            Not After : Jan  8 09:20:45 2035 GMT
-        Subject:
-            countryName               = ES
-            stateOrProvinceName       = Sevilla
-            localityName              = Dos Hermanas
-            organizationName          = Alejandro
-            organizationalUnitName    = ASIR2
-            commonName                = Alejandro CA
-            emailAddress              = alejandroliafru@gmail.com
-        X509v3 extensions:
-            X509v3 Basic Constraints: 
-                CA:FALSE
-            X509v3 Key Usage: 
-                Digital Signature, Non Repudiation, Key Encipherment
-Certificate is to be certified until Jan  8 09:20:45 2035 GMT (3650 days)
-Sign the certificate? [y/n]:y
-
-
-1 out of 1 certificate requests certified, commit? [y/n]y
-Write out database with 1 new entries
-Database updated
-
-```
+Para ello hare lo siguiente comando ```openssl ca -config openssl.cnf -extensions v3_req -days 3650 -notext -md sha256 -in csr/alejandro.csr -out certs/alejandro.crt -policy policy_loose``` y rellenamos los campos necesarios.
 
 Y vemos como se ha firmado en el directorio ```/certs``:
 
 ```
-debian@cripto:~/CA$ tree
+debian@cripto:~/CA$ tree 
 .
 ├── certs
-│   ├── alf-firmado.crt
+│   ├── alejandro.crt
 │   └── cacert.crt
 ├── crl
 ├── csr
-│   ├── ale-no-firmado.csr
-│   └── amg-alf.csr
+│   └── alejandro.csr
 ├── index.txt
 ├── index.txt.attr
 ├── index.txt.attr.old
@@ -640,39 +624,46 @@ debian@cripto:~/CA$ tree
 ├── serial
 └── serial.old
 
+6 directories, 12 files
+
 
 ```
 Y ahora se lo pasamos a nuestro compañero:
 
 ```
-debian@cripto:~/CA/certs$ scp alf-firmado.crt alejandro@172.22.12.25:/home/alejandro/CA/certs
+debian@cripto:~/CA/certs$ scp alejandro.crt alejandro@172.22.12.25:/home/alejandro/CA/certs
 alejandro@172.22.12.25's password: 
-alf-firmado.crt                               100% 2151     1.5MB/s   00:00
+alejandro.crt                                 100% 2163     1.6MB/s   00:00 
 ```
 
-y ahora vamos a comprobar que tengo tanto el mio firmado como el suyo que esta firmado, siendo el mio que le firme a mi comapñero, el fichero ```alf-firmado.crt``` y yo el que le firme y le pase ```andres_firmado.crt```, como podemos ver a continuación:
+Por lo que ahora vamos a comprobar que tengo tanto el mio firmado como el suyo que esta firmado, siendo el mio que le firme a mi comapñero, el fichero ```alejandro.crt``` y yo el que le firme y le pase ```andres_firmado.crt```, como podemos ver a continuación:
 
 ```
 debian@cripto:~/CA$ tree
 .
 ├── certs
-│   ├── alf-firmado.crt
-│   ├── andres_firmado.crt
+│   ├── alejandro.crt
 │   └── cacert.crt
 ...
 ..
 .
+```
+El mio que es ``andres_firmado.crt`` al ser autoridad certificadora lo tenemos que tener fuera del servidor web.
+
+```
+debian@cripto:~$ ls
+CA  andres_firmado.crt  andy.csr
 ```
 
 - ¿Qué otra información debes aportar a tu compañero para que éste configure de forma adecuada su servidor web con el certificado generado?
 
 Va a necesitar lo siguiente:
 
-1. Certificado firmado
+1. **Certificado firmado**
 
 - El certificado que le acabas de generar, por ejemplo: ``alf-firmado.crt``.
 
-2. Certificado de la Autoridad Certificadora (CA)
+2. **Certificado de la Autoridad Certificadora (CA)**
 
 - Proporcionar mi certificado raíz, el cual se llama ```cacert.crt```. Ya que es necesario para que el servidor web pueda establecer la cadena de confianza.
 
@@ -686,5 +677,259 @@ Además, necesitará información que se encuentra en el fichero openssl.conf re
 
 #### Preparación del escenario
 
+#### Apache 
 Para este punto necesitareis meterse en este [post](./pagina.md) ya que como anteriormente dije, tenemos el pao a paso explicado de como se hara nuetsra página.
+
+Por lo que voy a proceder a comenzar con la práctica con los siguientes pasos:
+
+1. **Creación de una clave privada RSA de 4096 bits para la identificación del servidor.**
+
+**Nota**: Esta parte lo haremos siendo **root**.
+
+- Comandos usados:
+
+```
+    sudo openssl genrsa -aes256 -out /etc/ssl/private/andy-priv.key 4096
+    sudo chmod 400 /etc/ssl/private/andy-priv.key
+```
+- Demostracion:
+
+```
+root@cripto:~# sudo openssl genrsa -aes256 -out /etc/ssl/private/andy-priv.key 4096
+Enter PEM pass phrase:
+Verifying - Enter PEM pass phrase:
+root@cripto:~# chmod 400 /etc/ssl/private/andy-priv.key 
+```
+Y comprobación de que estan hecho:
+```
+root@cripto:~# tree /etc/ssl/private/ 
+/etc/ssl/private/
+├── andy-priv.key
+└── ssl-cert-snakeoil.key
+
+1 directory, 2 files
+
+```
+
+2. Usar la clave anterior para generar un CSR, considerando que deseas acceder al servidor con el FQDN (andy.iesgn.org).
+
+- Modificaremos el fichero de configuración:
+
+Para ellos nos hemos pasado el ```cacert```, de nuestro compañero a la ``/home``, ya que somos administradores, no autoridad certificadora, por lo que estaria todo aqui:
+
+```
+debian@cripto:~$ ls
+CA  andres_firmado.crt  andy.csr  cacert.crt
+```
+Ahora modificaremos el fichero de configuracion ```/etc/apache2/sites-available/default-ssl.conf```y meteremos lo siguiente:
+
+```
+debian@cripto:~/CA$ cat /etc/apache2/sites-available/default-ssl.conf
+<IfModule mod_ssl.c>
+        <VirtualHost *:443>
+            ServerName andy.iesgn.org
+            DocumentRoot /var/www/andy.iesgn.org
+            ErrorLog ${APACHE_LOG_DIR}/error-andy.log
+            CustomLog ${APACHE_LOG_DIR}/access-andy.log combined
+
+            SSLEngine on
+            SSLCertificateFile /etc/ssl/certs/andres_firmado.crt
+            SSLCertificateKeyFile /etc/ssl/private/andy-priv.key
+            SSLCACertificateFile /etc/ssl/certs/cacert.crt
+
+            <Directory /var/www/andy.iesgn.org>
+                Options Indexes FollowSymLinks
+                AllowOverride None
+                Require all granted               
+            </Directory>
+        </VirtualHost>
+    </IfModule>
+```
+
+- Muevo los ficheros quye he generado anteriormente 
+
+```
+debian@cripto:~$ sudo chown root:root /etc/ssl/certs/andres_firmado.crt 
+debian@cripto:~$ sudo chown root:root /etc/ssl/certs/cacert.crt 
+debian@cripto:~$ sudo chmod 644 /etc/ssl/certs/andres_firmado.crt 
+debian@cripto:~$ sudo chmod 644 /etc/ssl/certs/cacert.crt 
+```
+Ahora una ve que tenemos puesto todo, hacemos lo siguiente:
+
+```
+debian@cripto:~$ sudo a2enmod ssl
+debian@cripto:~$ sudo a2ensite default-ssl.conf
+
+debian@cripto:~$ sudo systemctl restart apache2
+🔐 Enter passphrase for SSL/TLS keys for andy.iesgn.org:443 (RSA): (press TAB for no echo) 
+Broadcast message from root@cripto (Fri 2025-01-10 12:21:04 UTC):
+
+Password entry required for 'Enter passphrase for SSL/TLS keys for andy.iesgn.org:443 (RSA):' (PID 4517).
+Please enter password with the systemd-tty-ask-password-agent tool.
+
+*******
+
+```
+Una vez tenemos el reinicio de apache, se nos vera de la siguiente manera:
+
+![alt text](image-1.png)
+
+Como se puede apreciar, se nos ha mostrado una advertencia de seguridad, por lo que podemos asegurar que la redirección de **http://** a **https://** ha funcionado correctamente.
+
+Ésta advertencia es debida a que el navegador no ha podido comprobar la firma por parte de la CA en el certificado recibido por el servidor, básicamente porque no tiene la clave pública o certificado de la CA, por lo que debemos importarlo manualmente en el navegador.
+
+Para importar el certificado de la CA en un navegador Firefox, tendremos que pulsar en el icono de las **3 barras** en la **barra superior**, seguidamente en Preferencias y una vez ahí **(Ajustes)**, buscar el apartado **Privacidad & Seguridad**. Si nos desplazamos hasta la parte inferior del mismo, encontraremos la sección **Certificados**, en la que debemos pulsar en **Ver certificados**. Acto seguido, nos moveremos al apartado **Autoridades** para que así, pulsando en **Importar**, nos permita importar el certificado de una autoridad certificadora.
+
+Una vez seleccionado el certificado que vamos a importar, se nos mostraŕa un mensajer en el que nos dice **Se le ha pedido que confie en una nueva Autoridad Certificadora (CA)** y le damos a **Aceptar**.
+
+Tras todo esto, podremos ver que ha sido correctamente importado:
+![alt text](image-3.png)
+
+Posteriormente, recargaremos el navegador para así volver a mostrar la página ``andy.iesgn.org``, accediendo desde HTTPS:
+
+![alt text](image-4.png)
+
+Y como podemos apreciar se nos ha vuelto a mostrar la advertencia de seguridad, si nos fijamos al lado de la URL, por lo que si pulsamos el candado, se nos mostrará la información referente:
+
+![alt text](image-5.png)
+
+Y si le damos a **Ver certificado**, nos saldrá lo siguiente:
+
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+En esto podemos ver todda la información técnica sobre el certificado, asi como el nombre de la entidad, fecha en la que tiene expiración...
+
+##### ¿Por qué no es seguro siendo HTTPS?
+
+Dado que en el navegador nos sigue mostrando qyue el sitio **no es seguro** ya que lo que estoy usando es un certificado que ha sido emitido por una Autoridad Certificadora (CA) que no esta reconocida como confiable por los navegadores, esto esta ocurriendo porque el certificado ha sido emitido por una CA de mi compañero, por lo que aunque tengamos el HTTPS configurado, los navegadores (chrome o firefox) no van a confiar en una entidad que no este reconocida internacionalmente.
+
+Ya hemos comprobado que con **apache2** hemos conseguido hacer que HTTPS funcione (no funciona sin pagar a la entidad certificadora) por lo que sin la verificación de una entidad internacional, así que ahora vamos a hacer la misma prueba con la otra cara de la moneda, con **nginx**.
+
+#### Nginx
+
+Lo primero que voy a hacer es desinstalar apache e instalar nginx, para que no haya ningún conflicto, por lo que ejeutaremos el siguiente comando:
+
+```
+debian@cripto:~$ sudo apt remove apache2 && apt install nginx -y
+```
+
+Ahroa, comenzaré con la configuración del nuevo servidor web. Este servicio, también implementa un VirtualHost por defecto, pero a diferencia de apache2, podremos unificar la configuración del VirtualHost correspondiente al puerto 80 y el correspondiente al 443 en un único fichero, que se encuentra ubicado en ``/etc/nginx/sites-available/default``. Para modificarlo, ejecutaremos el comando:
+
+```debian@cripto:~$ sudo nano /etc/nginx/sites-available/default```
+
+Dentro del mismo tendre que crear dos directivas **server**, una para el VirtualHost accesible en el puerto 80 HTTP, dentro del cuál únicamente asignaremos el ServerName correspondiente y una redirección permanente para así forzar HTTPS. En la otra, para el VirtualHost accesible en el puerto 443 HTTPS, tendremos que configurar las siguientes directivas:
+
+- **server_name**: Indicaremos el nombre de dominio a través del cuál accederemos al servidor.
+- **ssl**: Activa el motor SSL, necesario para hacer uso de HTTPS, por lo que su valor debe ser on.
+- **ssl_certificate**: Indicamos la ruta del certificado del servidor firmado por la CA. En este caso, ``/etc/ssl/certs/andres_firmado.crt``.
+- **ssl_certificate_key**: Indicamos la ruta de la clave privada asociada al certificado del servidor. En este caso, ``/etc/ssl/private/andy-priv.key``.
+
+
+Por lo que el fichero editado será así:
+
+```
+debian@cripto:~$ cat /etc/nginx/sites-available/andy.iesgn.org
+server {
+    listen 80;
+    listen [::]:80;
+    server_name andy.iesgn.org;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name andy.iesgn.org;
+
+    ssl_certificate /etc/ssl/certs/andres_firmado.crt;
+    ssl_certificate_key /etc/ssl/private/andy-priv.key;
+    ssl_trusted_certificate /etc/ssl/certs/cacert.crt;
+
+    root /var/www/html/andy.iesgn.org;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+debian@cripto:~$ cat /etc/nginx/sites-available/default 
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        server_name andy.iesgn.org;
+
+        return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443 ssl default_server;
+        listen [::]:443 ssl default_server;
+
+        ssl    on;
+        ssl_certificate    /etc/ssl/certs/andres_firmado.crt;
+        ssl_certificate_key    /etc/ssl/private/andy-priv.key;
+
+        root /var/www/html;
+
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name andy.iesgn.org;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
+Una vez hecho esto, ahora lo que procedo es a hacer un ```index.html``` en la siguiente dirección ``/var/www/html/andy.iesgn.org/index.html``
+:
+
+```
+debian@cripto:/var/www/html/andy.iesgn.org$ cat index.html 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>andy.iesgn.org</title>
+    </head>
+    <body>
+        <h1>andy.iesgn.org</h1>
+        <p>Web de prueba para cripto 3 - HTTPS</p>
+        <p>PRUEBA NGINX</p>
+    </body>
+</html>
+
+```
+
+Ahora lo que haré sera realizar la firma del certificado de nuevo, ya que me he equivocado a la hora de poner la contraseña que nos pide, por lo que usare lo siguiente:
+
+```
+debian@cripto:~$ sudo openssl rsa -in /etc/ssl/private/andy-priv.key -out /etc/ssl/private/andy-priv.key
+Enter pass phrase for /etc/ssl/private/andy-priv.key:
+writing RSA key
+```
+
+Hacemos la realización del enlace simbolico del fichero de configuracion y reinicio el servicio de nginx:
+
+```
+sudo ln -s /etc/nginx/sites-available/andy.iesgn.org /etc/nginx/sites-enabled/
+
+sudo systemctl restart nginx
+```
+
+Y ahora vamos a comprobar que funciona por lo que dejo por aqui la demostración:
+![alt text](image-8.png)
+
+Y como podemos comprobar esta el certificado de mi compañero en la página:
+
+![alt text](image-10.png)
+
+Al igual que antes explique, antes haré de nuevo la mención en parafraseando lo anterior 
+
+##### ¿Por qué no es seguro siendo HTTPS?
+
+
+Aunque el sitio esté configurado para usar HTTPS, los navegadores siguen mostrando que el sitio **no es seguro**. Esto ocurre porque el certificado SSL que se está utilizando ha sido emitido por una Autoridad Certificadora (CA) que no es reconocida como confiable por los navegadores. En este caso, el certificado ha sido emitido por una CA interna o de un compañero, lo que significa que, aunque el sitio esté protegido con HTTPS, los navegadores (como Chrome o Firefox) no confían en una entidad que **no esté oficialmente reconocida** a nivel internacional. 
+Por lo que el resultado, nos muestran advertencias de seguridad indicando que el sitio no es completamente seguro.
 
