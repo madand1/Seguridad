@@ -684,7 +684,7 @@ Además, necesitará información que se encuentra en el fichero openssl.conf re
 
 ### Administramos el servidor Web
 
-# Preparación del escenario
+#### Preparación del escenario
 
 Para este punto necesitareis meterse en este [post](./pagina.md) ya que como anteriormente dije, tenemos el pao a paso explicado de como se hara nuetsra página.
 
