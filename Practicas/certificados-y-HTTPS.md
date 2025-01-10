@@ -460,6 +460,14 @@ extendedKeyUsage = critical, OCSPSigning
 - Ahora creare tanto la clave como el certificado de **AC** (Autoridad certifficadora) con el siguiente comado:
 
 1. **Creación de la clave privada (Generación de clave RSA para la Autoridad Certficadora):**
+
+- Comando:
+
+```
+openssl genrsa -aes256 -out private/private.key 4096
+```
+Demostración: 
+
 ```
 debian@cripto:~/CA$ openssl genrsa -aes256 -out private/private.key 4096
 Enter PEM pass phrase:
@@ -475,12 +483,18 @@ Donde:
 
 Por lo que se guarda el archivo ``private/private.key``
 
-2. **Creación del certificado autofirmado de la Autoridad Certificadora (AC)**
+1. **Creación del certificado autofirmado de la Autoridad Certificadora (AC)**
 
 Para hacer esto, tenemos que estar en el directorio donde se encuentre ``openssl.cnf``, y una vez en ese directorio, vamos a crearlo:
+-  Comando para crearlo:
+```
+openssl req -config ./openssl.cnf -key private/private.key -new -x509 -days 3650 -sha256 -out certs/cacert.crt
+```
+
+- Demostración:
 
 ```
-debian@cripto:~/CA$ openssl req -config ./openssl.cnf -key private/private.key -new -x509 -days 3650 -sha256 -out certs/andy.crt
+debian@cripto:~/CA$ openssl req -config ./openssl.cnf -key private/private.key -new -x509 -days 3650 -sha256 -out certs/cacert.crt
 Enter pass phrase for private/private.key:
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
@@ -514,7 +528,7 @@ Donde:
 
 - ``-sha256``: Indica que se debe usar el algoritmo de hash SHA-256 para firmar el certificado. SHA-256 es parte de la familia de funciones de hash SHA-2 y es una opción estándar para la firma de certificados, ofreciendo un alto nivel de seguridad.
 
-- ``-out certs/andy.crt``: Especifica el archivo de salida donde se guardará el certificado generado, en este caso en certs/andy.crt.
+- ``-out certs/cacert.crt``: Especifica el archivo de salida donde se guardará el certificado generado, en este caso en certs/cacert.crt.
 
 Y como podemos ver lo tenemos en sus directorios:
 
@@ -522,7 +536,7 @@ Y como podemos ver lo tenemos en sus directorios:
 debian@cripto:~/CA$ tree
 .
 ├── certs
-│   └── andy.crt
+│   └── cacert.crt
 ├── crl
 ├── csr
 ├── index.txt
@@ -536,4 +550,141 @@ debian@cripto:~/CA$ tree
 6 directories, 6 files
 
 ```
+Ahora haré un inciso y voy a realizar un archivo **CSR** para poder enviarselo a mi compañero, para ello he usado el siguiente comando ``openssl req -new -key private/private.key -out csr/amg-alf.csr -config openssl.cnf`` , hay que **rellenar todos los campos** y vamos a comprobar que lo tenemos ya hecho haciendo un tree desde dnuestra consola:
+
+```
+debian@cripto:~$ tree
+.
+└── CA
+    ├── certs
+    │   └── cacert.crt
+    ├── crl
+    ├── csr
+    │   └── amg-alf.csr
+    ├── index.txt
+    ├── index.txt.attr
+    ├── newcerts
+    ├── openssl.cnf
+    ├── private
+    │   └── private.key
+    └── serial
+
+7 directories, 7 files
+```
+
+Una vez comprobado, vamos a mandarselo para que nos la firme, y asi tambien que tendrá que hacer nuestro compañero. Por lo que nos va a enviar a nosostros la suya, para poder firmarla,o y la nuestra ya firmada por él.
+
+- Firmada por **Alejandro Liañez Frutos**
+
+El cual es ``andres-firmado.crt``
+
+
+- Firmar el certificado de **Alejandro Liañez Frutos**:
+
+Para ello hare lo siguiente comando ```openssl ca -config openssl.cnf -extensions v3_req -days 3650 -notext -md sha256 -in csr/ale-no-firmado.csr -out certs/alf-firmado.crt -policy policy_loose``` y nos saldrá por pantalla lo siguiente:
+```
+debian@cripto:~/CA$ openssl ca -config openssl.cnf -extensions v3_req -days 3650 -notext -md sha256 -in csr/ale-no-firmado.csr -out certs/alf-firmado.crt -policy policy_loose
+Using configuration from openssl.cnf
+Enter pass phrase for /home/debian/CA/private/private.key:
+Check that the request matches the signature
+Signature ok
+Certificate Details:
+        Serial Number: 4096 (0x1000)
+        Validity
+            Not Before: Jan 10 09:20:45 2025 GMT
+            Not After : Jan  8 09:20:45 2035 GMT
+        Subject:
+            countryName               = ES
+            stateOrProvinceName       = Sevilla
+            localityName              = Dos Hermanas
+            organizationName          = Alejandro
+            organizationalUnitName    = ASIR2
+            commonName                = Alejandro CA
+            emailAddress              = alejandroliafru@gmail.com
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature, Non Repudiation, Key Encipherment
+Certificate is to be certified until Jan  8 09:20:45 2035 GMT (3650 days)
+Sign the certificate? [y/n]:y
+
+
+1 out of 1 certificate requests certified, commit? [y/n]y
+Write out database with 1 new entries
+Database updated
+
+```
+
+Y vemos como se ha firmado en el directorio ```/certs``:
+
+```
+debian@cripto:~/CA$ tree
+.
+├── certs
+│   ├── alf-firmado.crt
+│   └── cacert.crt
+├── crl
+├── csr
+│   ├── ale-no-firmado.csr
+│   └── amg-alf.csr
+├── index.txt
+├── index.txt.attr
+├── index.txt.attr.old
+├── index.txt.old
+├── newcerts
+│   └── 1000.pem
+├── openssl.cnf
+├── private
+│   └── private.key
+├── serial
+└── serial.old
+
+
+```
+Y ahora se lo pasamos a nuestro compañero:
+
+```
+debian@cripto:~/CA/certs$ scp alf-firmado.crt alejandro@172.22.12.25:/home/alejandro/CA/certs
+alejandro@172.22.12.25's password: 
+alf-firmado.crt                               100% 2151     1.5MB/s   00:00
+```
+
+y ahora vamos a comprobar que tengo tanto el mio firmado como el suyo que esta firmado, siendo el mio que le firme a mi comapñero, el fichero ```alf-firmado.crt``` y yo el que le firme y le pase ```andres_firmado.crt```, como podemos ver a continuación:
+
+```
+debian@cripto:~/CA$ tree
+.
+├── certs
+│   ├── alf-firmado.crt
+│   ├── andres_firmado.crt
+│   └── cacert.crt
+...
+..
+.
+```
+
+- ¿Qué otra información debes aportar a tu compañero para que éste configure de forma adecuada su servidor web con el certificado generado?
+
+Va a necesitar lo siguiente:
+
+1. Certificado firmado
+
+- El certificado que le acabas de generar, por ejemplo: ``alf-firmado.crt``.
+
+2. Certificado de la Autoridad Certificadora (CA)
+
+- Proporcionar mi certificado raíz, el cual se llama ```cacert.crt```. Ya que es necesario para que el servidor web pueda establecer la cadena de confianza.
+
+3. Archivo de clave privada de su CSR
+
+La clave privada (```private.key```) que se generó originalmente y que corresponde al CSR. Este archivo debe mantenerse en secreto y debe ser configurado en el servidor para cifrar las comunicaciones y firmar la conexión.
+
+Además, necesitará información que se encuentra en el fichero openssl.conf relacionada al **countryName, stateOrProvinceName y localityName**.
+
+### Administramos el servidor Web
+
+# Preparación del escenario
+
+Para este punto necesitareis meterse en este [post](./pagina.md) ya que como anteriormente dije, tenemos el pao a paso explicado de como se hara nuetsra página.
 
