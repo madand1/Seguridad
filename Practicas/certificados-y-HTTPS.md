@@ -280,6 +280,28 @@ Una vez hemos creado los documentos, y hemos revisado su contenido, lo que tendr
 2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
 3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
 
+## Tarea 4: Autentificación
+
+1. Utilizando tu certificado accede a alguna página de la administración pública (cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.
+
+Vamos a acceder a la página web de [DGT](https://www.dgt.es/nuestros-servicios/permisos-de-conducir/tus-puntos-y-tus-permisos/consulta-y-certificado-de-puntos/), para poder verificcar el uso de nuestro certificado digital, tendremos que irnos a este apartado:
+
+![alt text](image-11.png)
+
+Pulsaremos donde nos pone **Consulta tus puntos** esto nos redirigira, a la siguiente página donde tendremos que coger la opción **Cl@ve**.
+
+![alt text](image-12.png)
+
+Dentro de esta opción se nos abrira otra página y tendremos qu eelegir la opción de **Accesso DNIe / Certificado electrónico**
+![alt text](image-13.png)
+
+Se nos abrira lo siguiente, y pulsamos en **Aceptar**
+
+![alt text](image-14.png)
+
+y ya tendremos nuestros datos, como podemos ver a continuación:
+
+![alt text](image-15.png)
 ## HTTPS / SSL
 
 ![Portada](./img/ssl-vs-https3.png)
