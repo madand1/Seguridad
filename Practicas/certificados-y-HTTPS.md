@@ -284,11 +284,48 @@ Una vez hemos creado los documentos, y hemos revisado su contenido, lo que tendr
 ![alt text](image-17.png)
 
 
-# POr aqui me quede!!!!!
-
-
 2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
+
+He recibido el fichero de mi compañero **Alejandro Liañez Frutos** y podmeos ver como el fichero que nos ha mandado ha sido firmado por el:
+
+![Validacion de firma](image-18.png)
+
+y que tambien le podemos ver el contenido si no svamos a **Visualizar Firma**:
+
+![Texto que nos ha dado el fichero firmado por Liañez](image-19.png)
+
+Y en el caso de **AutoFirma**, tendremos que usar la aplicación, y se nos abrira al elegir el fichero en cuestión, la siguiente pantalla:
+
+![alt text](image-20.png)
+
+Y si le damos a **Ver Fichero** no sale quien es el firmante:
+
+![alt text](image-21.png)
+
+Y si ya queremos ver el contenido, le daremos a lo que esta marcado:
+![](image-22.png)
+
+y este es el contenido:
+
+![alt text](image-23.png)
+
+**Repuestas a las preguntas:**
+
+Y respondiendo a las preguntas anteriores si podemos verificar la fimr aunaque no tengamso la clave pública de neuestro compañero, ya que es debido a que esta clave pública se adjunta en el propio fichero que ya esta firmado, por lo que se puede verificar la firma.
+
+Y no es necesario Internet para **AutoFirma** ya que es una aplicación que se ejecuta en nuestro propio pc, pero si que es necesario para **VALIDe**
+
 3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
+
+
+Mi compañero va a firmar los documentos anteriores que le pase, y ahora vere quien esta firmado tanto en **VALIDe** como en **AutoFirma**
+
+- **Valide**
+
+![alt text](image-25.png)
+- **AutoFirma**
+
+![alt text](image-24.png)
 
 ## Tarea 4: Autentificación
 
