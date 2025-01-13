@@ -274,6 +274,16 @@ Hola. Como vas?. Hace tiempo no se de ti. Esto es una prueba de AutoFirma.
 
 Una vez hemos creado los documentos, y hemos revisado su contenido, lo que tendremos que hacer es firmarlos tanto con **VALIDe** como con **AutoFirma**, correspondientemente, de la siguiente manera:
 
+- **Autofirma**:
+  - Arrastramos y como podemos ver lo tenemos ya firmado:
+![alt text](image-16.png)
+
+- **VALIDe**
+
+  - Para esto lo que tendremos que irnos será a la pestaña de **Realizar firma**, una vez aquí tendremos que pulsar el botón **Firmar** y se nos abrira una nueva pantalla, en la cual tendremos que elegir el fichero que queremos firmar, despues vamos a pulsar **Guardar Firma** una vez acabado este poceso tendremos que ir a la pestaña donde ponde **Visualizar Firma** y elegir como podemos ver el fichero y quien la firmo:
+![alt text](image-17.png)
+
+
 # POr aqui me quede!!!!!
 
 
