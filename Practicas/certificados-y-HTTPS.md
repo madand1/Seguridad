@@ -8,9 +8,9 @@ Para la realización de esta práctica recomiendo que se haga una lectura de los
 Ya que estos tendrán un tema importante en esta parte, pero al haberlo tratado en profundidad anteriormente, vamos a obviar ciertos aspectos o pasos.
 ## Certificado digital de persona física
 
-## Introducción
+### Introducción
 
-### ¿Qué es un certificado digital?
+#### ¿Qué es un certificado digital?
 
 Un certificado digital es un archivo electrónico que acredita la identidad de una persona, ya sea física o jurídica, y se emplea para la firma de documentos digitales. Este certificado incluye datos sobre el solicitante, como su nombre, apellidos, número de identificación (DNI), fecha de nacimiento, entre otros. También incorpora información sobre la entidad emisora, como su nombre, CIF, dirección, y otros detalles relevantes.
 
@@ -23,29 +23,29 @@ Ahora vamos a proceder obtener el certificado, y hacer la instalación.
 ### Instalación del certificado en nuestro navegador
 
 
-#### La pregunta 1 y 2 la he respondido que podria ser una, esto tendria que preguntar
 
-1. Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.
 
-Para ello he usado la app [Certificado digital FNMT](https://play.google.com/store/apps/details?id=es.fnmtrcm.ceres.certificadoDigitalFNMT&hl=es_419&pli=1),la cual lo hice a través de mi teléfono móvil, ya que para pedirlo he tenido que hacer una video llamada para conseguirlo, y una vez que hayamos pagado procedemos a instalarlo por lo que nos pedirá nuetsro nombre, primer apellido y tendremos que poner una contraseña, y ahora lo que tendremos que hacer es instalarlo.
+1. **Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.**
 
-Una vez instalado el certificado, nos preguntara si queremos crer una copia de seguirdad del certificado, se nos confirmarña que la copia de seguridad se realizo correctamente, como la tengo en el móvil lo que voy a hacer es pasarla a través de whatsapp, tal y como muestro a continuación:
+Para ello he usado la app [Certificado digital FNMT](https://play.google.com/store/apps/details?id=es.fnmtrcm.ceres.certificadoDigitalFNMT&hl=es_419&pli=1),la cual lo hice a través de mi teléfono móvil, ya que para pedirlo he tenido que hacer una video llamada para conseguirlo, y una vez que hayamos pagado procedemos a instalarlo por lo que nos pedirá nuestro nombre, primer apellido y tendremos que poner una contraseña, y ahora lo que tendremos que hacer es instalarlo.
+
+Una vez instalado el certificado, nos preguntara si queremos crear una copia de seguirdad del certificado, se nos confirmará que la copia de seguridad se realizo correctamente, como la tengo en el móvil lo que voy a hacer es pasarla a través de whatsapp, tal y como muestro a continuación:
 
 ![Envio de copia de seguridad](./img/certificado-copia-whatsapp.png)
 
-Una vez que tengo esto procederé a instalarlo lo que será al navegador, como no voy a usar **firefox** , por lo que tendremos que abrir en primer luegar el navegador, y nos dirigeremos a la sección de **Ajustes**
+Una vez que tengo esto, procederé a instalarlo lo que será al navegador, como no voy a usar **firefox** , por lo que tendremos que abrir en primer luegar el navegador, y nos dirigeremos a la sección de **Ajustes**
 
 
 ![Ajustes](./img/ajustes.png)
 
-2. Muestra una captura de pantalla donde se vea las preferencias del navegador donde se ve instalado tu certificado.
+2. **Muestra una captura de pantalla donde se vea las preferencias del navegador donde se ve instalado tu certificado.**
 
 
 Una vez dentro nos dirigiremos a la sección **Privacidad & Seguridad > Certificados > Ver certificados** y haremos clic en **Importar** y seleccionaremos el archivo que tiene como extensión **.p12** y meteremos la contraseña que le pusimos en el dispositivo móvil con anterioridad, y una vez hecho confirmaremos la importación, y se nos veriá tal que así despues de seguir estos pasos:
 
 ![Certificado instalado](./img/certificado-instalado.png)
 
-3. ¿Cómo puedes hacer una copia de tu certificado?¿Como vas a realizar la copia de seguridad de tu certificado?. Razona la respuesta.
+3. **¿Cómo puedes hacer una copia de tu certificado?¿Como vas a realizar la copia de seguridad de tu certificado?. Razona la respuesta.**
 
 Para hacer este paso, nos deberemos dirigir a la parte derecha superior en el buscador e ir a lo siguiente **Ajustes > Privacidad y Seguridad > Certificados > Ver Certificados**. Este nos abrira la misma ventana que hemos visto con anterioridad. 
 
@@ -53,7 +53,7 @@ Clicariamos en el certificado que queremos hacer una copia de seguridad en este 
 
 ![copia](./img/copia.png)
 
-Una vez introduzcamos la contraseña para proteger nuetsra copia de seguridad, tendremos hecha la copia.
+Una vez introduzcamos la contraseña para proteger nuestra copia de seguridad, tendremos hecha la copia.
 
 ![Verificación copia certficiado digital](./img/verificación-copia-seguridad.png)
 
@@ -61,13 +61,13 @@ Como la tengo en mi móvil lo que he hecho ha sido una copia para este ejercicio
 
 ![Drive](./img/cert-digital-drive.png)
 
-4. Investiga como exportar la clave públia de tu certificado.
+4. **Investiga como exportar la clave públia de tu certificado.**
 
 La clave pública se utiliza para garantizar que los datos cifrados puedan ser descifrados solo por la clave privada asociada, que está en manos del titular del certificado. Este proceso es esencial para compartir la parte pública de un par de claves en comunicaciones seguras o validaciones de firma.
 
 #### Pasos para exportar la clave públcia:
 
-1. Convertir el certificado P12 a JKS (Java KeyStore): Esto es necesario para utilizar herramientas que operan con este formato.
+1. ***Convertir el certificado P12 a JKS (Java KeyStore): Esto es necesario para utilizar herramientas que operan con este formato.***
 
 ```
 keytool -importkeystore -srckeystore certificado-andres.p12 -srcstoretype pkcs12 -destkeystore certificado.jks -deststoretype JKS
@@ -103,11 +103,11 @@ Warning:
 El almacén de claves JKS utiliza un formato propietario. Se recomienda migrar a PKCS12, que es un formato estándar del sector que utiliza "keytool -importkeystore -srckeystore certificado.jks -destkeystore certificado.jks -deststoretype pkcs12".
 ```
 
-2. Listar alias del almacén JKS para identificar el alias correcto:
+2. ***Listar alias del almacén JKS para identificar el alias correcto:***
 
 Antes de exportar la clave pública, debes identificar el alias del certificado dentro del almacén.
 
-comando ```keytool -list -keystore certificado.jks``` y nos sldrá lo siguiente:
+comando ```keytool -list -keystore certificado.jks``` y nos saldrá lo siguiente:
 
 ```
 madandy@toyota-hilux:~/Documentos/certificado-digital/tarea1$ 
@@ -125,8 +125,8 @@ Warning:
 El almacén de claves JKS utiliza un formato propietario. Se recomienda migrar a PKCS12, que es un formato estándar del sector que utiliza "keytool -importkeystore -srckeystore certificado.jks -destkeystore certificado.jks -deststoretype pkcs12".
 ```
 
-3. Exportar la clave pública al formato PEM
-Utiliza el alias correcto para exportar la clave pública, para ello haremos uso del siguiente comando ```keytool -exportcert -keystore certificado.jks -alias morales_gonzalez_andres___49134204v_sdc_1_2_18_a -file clave-publica.pem -rfc```
+3. ***Exportar la clave pública al formato PEM
+Utiliza el alias correcto para exportar la clave pública, para ello haremos uso del siguiente comando ```keytool -exportcert -keystore certificado.jks -alias morales_gonzalez_andres___49134204v_sdc_1_2_18_a -file clave-publica.pem -rfc```***
 
 Donde:
 
@@ -146,7 +146,7 @@ Warning:
 El almacén de claves JKS utiliza un formato propietario. Se recomienda migrar a PKCS12, que es un formato estándar del sector que utiliza "keytool -importkeystore -srckeystore certificado.jks -destkeystore certificado.jks -deststoretype pkcs12".
 ```
 
-4. Verificamos el contenmido del archivo que hemos exportado
+4. ***Verificamos el contenmido del archivo que hemos exportado***
 
 Para ello nos ayudaremos del comando ```cat calve-publica.pem```
 
@@ -234,7 +234,7 @@ Y si le damos a **Ver información ampliada**, nos mostrará lo siguiente:
 
 ## Tarea 3: Firma electrónica
 
-1. Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.
+1. **Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.**
 
 Para esto lo que vamos a crear dos documentos, cada uno para una función:
 
@@ -284,7 +284,7 @@ Una vez hemos creado los documentos, y hemos revisado su contenido, lo que tendr
 ![alt text](image-17.png)
 
 
-2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
+2. **Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.**
 
 He recibido el fichero de mi compañero **Alejandro Liañez Frutos** y podmeos ver como el fichero que nos ha mandado ha sido firmado por el:
 
@@ -315,7 +315,7 @@ Y respondiendo a las preguntas anteriores si podemos verificar la fimr aunaque n
 
 Y no es necesario Internet para **AutoFirma** ya que es una aplicación que se ejecuta en nuestro propio pc, pero si que es necesario para **VALIDe**
 
-3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
+**3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.**
 
 
 Mi compañero va a firmar los documentos anteriores que le pase, y ahora vere quien esta firmado tanto en **VALIDe** como en **AutoFirma**
@@ -329,7 +329,7 @@ Mi compañero va a firmar los documentos anteriores que le pase, y ahora vere qu
 
 ## Tarea 4: Autentificación
 
-1. Utilizando tu certificado accede a alguna página de la administración pública (cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.
+**1. Utilizando tu certificado accede a alguna página de la administración pública (cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.**
 
 Vamos a acceder a la página web de [DGT](https://www.dgt.es/nuestros-servicios/permisos-de-conducir/tus-puntos-y-tus-permisos/consulta-y-certificado-de-puntos/), para poder verificcar el uso de nuestro certificado digital, tendremos que irnos a este apartado:
 
@@ -349,6 +349,8 @@ Se nos abrira lo siguiente, y pulsamos en **Aceptar**
 y ya tendremos nuestros datos, como podemos ver a continuación:
 
 ![alt text](image-15.png)
+
+
 ## HTTPS / SSL
 
 ![Portada](./img/ssl-vs-https3.png)
@@ -747,7 +749,7 @@ Además, necesitará información que se encuentra en el fichero openssl.conf re
 #### Preparación del escenario
 
 #### Apache 
-Para este punto necesitareis meterse en este [post](./pagina.md) ya que como anteriormente dije, tenemos el pao a paso explicado de como se hara nuetsra página.
+Para este punto necesitareis meterse en este [post](./pagina.md) ya que como anteriormente dije, tenemos el pao a paso explicado de como se hara nuestra página.
 
 Por lo que voy a proceder a comenzar con la práctica con los siguientes pasos:
 
