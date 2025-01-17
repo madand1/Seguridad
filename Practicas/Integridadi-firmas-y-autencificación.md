@@ -33,7 +33,7 @@ uid        [  absoluta ] Andrés Morales González <asirandyglez@gmail.com>
 sub   rsa3072 2024-12-16 [E] [caduca: 2026-12-16]
 ```
 
-Como podemos ver, las claves existentes en mi anillo de claves es la mía personal y la de ***Alejandro Liáñez Frutos***, así que procederemos a subir dicha clave a un servidor de claves, como por ejemplo, keys.gnupg.net (haciendo uso del fingerprint para así poder identificarla). Para ello, haremos uso del comando:
+Como podemos ver, las claves existentes en mi anillo de claves es la mía personal y la de ***Alejandro Liáñez Frutos***, así que procederemos a subir dicha clave a un servidor de claves,por lo que usaremos:
 
 ```gpg --keyserver keys.gnupg.net --send-key <ID> ```
 
@@ -43,18 +43,14 @@ gpg --keyserver keys.gnupg.net --send-key B7E822D8FB45BD8BAF2F31561B80812C7BB9EA
 gpg: enviando clave 1B80812C7BB9EA86 a hkp://pgp.surf.nl
 ```
 
-La clave ya ha sido subida al servidor de claves, de manera que la persona que reciba mi fichero firmado podrá importarla para verificar mi firma.
+La clave ya ha sido subida al servidor de claves, por lo que vamos a verificar mi firma.
 
-Podríamos firmar un fichero e incluir la firma en el mismo, de manera que estaría unificado ```(opción --sign)```, o bien podríamos tener el fichero por un lado, y la firma por otro, tal y como vamos a hacer en esta ocasión ```(opción --detach-sign)```.
-
-En este caso, vamos a firmar un fichero de nombre *espartaco.pdf* y a separar la firma en un fichero aparte, ejecutando para ello el comando:
+Para este caso, vamos a firmar un fichero de nombre *espartaco.pdf* y a separar la firma en un fichero aparte, ejecutando para ello el comando:
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
 gpg --detach-sign espartaco.pdf 
 ```
-
-Para llevar a cabo el proceso de firmado, nos pedirá la frase de paso de nuestra clave privada, así que la introduciremos. Tras ello, listaremos el contenido del directorio actual, estableciendo un filtro por nombre:
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
@@ -76,9 +72,9 @@ gpg:                usando RSA clave B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86
 gpg: Firma correcta de "Andrés Morales González <asirandyglez@gmail.com>" [absoluta]
 ```
 
-Como se puede apreciar, el fichero original (espartaco.pdf) y la firma (espartaco.pdf.sig) se encuentran en ficheros separados, de manera que podríamos enviarlos a un compañero para que así verificase la integridad del fichero, haciendo uso de nuestra clave pública.
+Como se puede ver, el fichero original y la firma se encuentran en ficheros separados, de manera que podríamos enviarlos a un compañero para que así verificase la integridad del fichero, haciendo uso de nuestra clave pública, con la que hemos estado trabajando hasta el momento.
 
-Nuestro compañero (Alejandro Liáñez Frutos) ha realizado de forma paralela el mismo procedimiento que nosotros, por lo tanto, antes de tratar de verificar la firma de dicho fichero, tendré que importar la clave pública de la persona que lo ha firmado. Para ello, ejecutaré el comando:
+Nuestro compañero (Alejandro Liáñez Frutos) ha hecho el mismo proceso que nosotros, por lo que voy a importar la clave pública de la persona que lo ha firmado.
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
@@ -91,9 +87,9 @@ gpg:          No hay indicios de que la firma pertenezca al propietario.
 Huellas dactilares de la clave primaria: B397 2246 8D05 99C3 B62F  9AEA 9E7B EEE5 32BE 0469
 ```
 
-Como podemos ver la firma es correcta, tal y como nos ha informado la salida del comando. Pero si nos fijamos con más detenimiento, este nos devuelve un mensaje en el cual nos informa que la clave no está certificada por una firma de confianza, por lo que no hay indicios de que la firma sea de quien dice ser. Esto se debe a que no tenemos validez en la clave pública que hemos importado, en este caso en la de ***Alejandro Liáñez Frutos***, o para que nos entendamos, aún no hemos firmado ni tampoco tenemos personas intermediarias con las que validar la clave de forma indirecta.
+La firma mostrada es válida, tal como lo confirma la salida del comando utilizado. Sin embargo, al analizar más detenidamente, observamos un mensaje que indica que la clave no está certificada por una firma confiable. Esto implica que no se puede garantizar que la firma pertenezca realmente a quien dice ser. Esta situación ocurre porque no hemos validado la clave pública importada, en este caso, la correspondiente a Alejandro Liáñez Frutos. En otras palabras, aún no hemos firmado esta clave ni contamos con validaciones indirectas a través de terceros de confianza.
 
-Ahora para seguir con la práctica, lo que haré será eliminar la clave pública de ***Alejandro Liáñez Frutos*** de mi anillo de claves, para asi poder empezar desde un punto completamente limpio e impoluto, solamente con mi clave en mi anillo, por lo que he hecho uso de la siguiente opción de comando ```--delete-keys```:
+Para continuar con la práctica, procederé a eliminar la clave pública de Alejandro Liáñez Frutos de mi anillo de claves. Esto me permitirá empezar desde un entorno completamente limpio, manteniendo únicamente mi clave en el anillo. Para ello, utilizaré la opción de comando  ```--delete-keys```:
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
@@ -128,18 +124,12 @@ sub   rsa3072 2024-12-16 [E] [caduca: 2026-12-16]
  gpg:          No hay indicios de que la firma pertenezca al propietario.
  Huellas dactilares de la clave primaria: E8DD 5DA9 3B88 F08A DA1D  26BF 5141 3DDB 0C99 55FC
 ```
-El mensaje muestra que la firma digital del archivo o mensaje es válida y corresponde a la clave asociada a "Pepe D josedom24@gmail.com", pero también advierte que no se puede asegurar que esa clave pertenezca realmente a esa persona porque no está certificada como confiable. Esto ocurre porque no he validado la clave ni hay una cadena de confianza que lo respalde. Para confirmar su autenticidad, puedo verificar manualmente la huella dactilar con el propietario, y si confío en ella, marcarla como confiable en mi sistema.
+El mensaje indica que la firma digital del archivo o mensaje es válida y corresponde a la clave asociada a "Pepe D josedom24@gmail.com". 
+
 
 ### Crea un anillo de confianza entre los miembros de la clase.
 
-
-En el uso habitual de los pares de claves GPG, surge un problema crucial: la confianza. Es indispensable contar con un método que nos permita confirmar que las claves públicas que utilizamos realmente pertenecen a la persona que afirman representar. Esto nos asegura que, al cifrar un archivo con una clave pública, el destinatario sea quien corresponde y no un impostor. Asimismo, cuando verificamos la firma de un archivo, debemos tener la certeza de que la persona que lo firmó es realmente quien dice ser.
-
-Una solución posible es establecer un anillo de confianza, que consiste en un grupo reducido de personas que se conocen entre sí. Para demostrar que confiamos en la clave pública de alguien, firmamos la huella digital (o fingerprint) de dicha clave utilizando nuestra clave privada. Luego, enviamos la clave firmada al propietario, quien puede importarla y redistribuirla con nuestra firma añadida. Esto aumenta la autenticidad y la confianza en esa clave.
-
-Gracias a este mecanismo, si confiamos en alguien que nos envió su clave pública y esa persona a su vez valida la clave de una tercera persona (firmándola), podríamos aceptar esta tercera clave como válida. Esto depende de nuestra configuración y se basa en la relación de confianza compartida. En este sistema, la responsabilidad de validar claves públicas recae en las personas en las que confiamos. Puede parecer un poco complejo, así que usaremos un ejemplo para aclararlo.
-
-### Pasos para crear un anillo de confianza
+#### Pasos para crear un anillo de confianza
 
 #### 1. Subir mi clave pública a un servidor de claves
 
@@ -637,7 +627,7 @@ La herramienta empleada en *Secure-Apt* para firmar los archivos y verificar sus
 
 ### ¿Para qué sirve el comando apt-key? ¿Qué muestra el comando apt-key list?
 
-El comando `apt-key` es una herramienta que permite gestionar las claves utilizadas por APT para autenticar paquetes, considerando como confiables aquellos paquetes que han sido correctamente autenticados mediante estas claves. Las opciones más comunes son:
+El comando `apt-key` no permite gestionar las claves utilizadas por APT para autenticar paquetes. Las opciones más comunes son:
 
 - `add`: Añade una nueva clave a la lista de claves de confianza desde un archivo que se pasa como parámetro.
 - `del`: Elimina una clave de la lista de claves de confianza, especificando el fingerprint de la clave como parámetro.
@@ -785,23 +775,18 @@ uid        [desconocida] Spotify Public Repository Signing Key <tux@spotify.com>
 
 ### ¿En que fichero se guarda el anillo de claves que usa la herramienta apt-key?
 
-El anillo de claves gestionado por `apt-key` se encuentra en el archivo `/etc/apt/trusted.gpg`, donde se van añadiendo las nuevas claves. Sin embargo, como se mostró en el ejemplo anterior, existen varios keyrings adicionales dentro del directorio `/etc/apt/trusted.gpg.d/`, los cuales contienen más claves de confianza.
+En el sistema, el anillo de claves que maneja apt-key se almacena en el archivo /etc/apt/trusted.gpg, donde se van agregando las nuevas claves. Además, como vimos en el ejemplo anterior, hay otros keyrings adicionales ubicados en el directorio /etc/apt/trusted.gpg.d/, que también contienen más claves confiables.
 
 ### ¿Qué contiene el archivo Release de un repositorio de paquetes? ¿Y el archivo Release.gpg? Explica el proceso por el cual el sistema nos asegura que los ficheros que estamos descargando son legítimos.
 
-Los repositorios de Debian incluyen varios archivos, entre los que se encuentran `Release` y `Release.gpg`.
 
-El archivo `Release` contiene una lista de los archivos `Packages` (incluyendo sus versiones comprimidas, como `Packages.gz` y `Packages.xz`), así como sus hashes MD5, SHA1 y SHA256. Esto permite verificar que los archivos `Packages` no han sido alterados, comparando el hash proporcionado con el que calculamos sobre el archivo descargado. Si los hashes coinciden, podemos estar seguros de que el archivo no ha sido manipulado.
+Los repositorios de Debian utilizan archivos como Release y Release.gpg para garantizar la integridad y autenticidad de los paquetes.
 
-Sin embargo, este método no sería efectivo si un atacante modificara también el archivo `Release`, haciéndonos creer que no ha habido alteraciones al coincidir los hashes. Para evitar esto, se firma el hash del archivo `Release`, y el resultado de esa firma se encuentra en el archivo `Release.gpg`, lo que hace imposible falsificar la información. Así, APT utiliza las claves públicas contenidas en `/etc/apt/trusted.gpg` y `/etc/apt/trusted.gpg.d/` para verificar la firma del archivo `Release`.
+- Release: Contiene hashes (MD5, SHA1, SHA256) de los archivos Packages y sus versiones comprimidas (Packages.gz, Packages.xz). Esto asegura que los archivos descargados no han sido alterados, siempre que los hashes coincidan.
+- Release.gpg: Es la firma criptográfica del archivo Release, lo que evita que un atacante pueda falsificar los hashes del archivo Release.
+Cuando ejecutas un apt update, el sistema descarga los archivos Packages.gz, Release y Release.gpg, validando los hashes de los paquetes .deb y asegurando que ninguna manipulación ha ocurrido. Esta verificación jerárquica detecta incluso cambios mínimos, ya que alterar un solo bit cambia completamente el hash.
 
-El contenido de los archivos `Packages` es una lista de los paquetes disponibles en el repositorio junto con sus hashes, lo que garantiza que el contenido de esos paquetes tampoco ha sido modificado.
-
-En resumen, cuando se realiza un `apt update`, se descargan los archivos `Packages.gz`, `Release` y `Release.gpg`. Estos archivos son esenciales para la descarga de paquetes, ya que primero se verifica que el hash del paquete `.deb` coincida con el indicado en el archivo `Packages.gz`, luego se comprueba que coincida con el hash en el archivo `Release` y, finalmente, se valida la firma del archivo `Release` contenida en `Release.gpg`.
-
-Se establece así una estructura de firma jerárquica, de modo que cualquier alteración, incluso la más pequeña, sería fácilmente detectada, ya que modificar un solo bit cambiaría completamente el hash.
-
-Por lo que, el uso de los archivos `Release` y `Release.gpg` está en declive, ya que se está implementando una transición al archivo `InRelease`, que está firmado criptográficamente en línea, a diferencia de los otros casos que requieren dos archivos debido a que la firma se maneja por separado.
+Sin embargo, el uso de Release y Release.gpg está siendo reemplazado por el archivo InRelease, que combina el contenido de Release y su firma en un solo archivo, simplificando el proceso.
 
 ### Añade de forma correcta el repositorio de VirtualBox junto a su clave pública.
 
@@ -864,26 +849,24 @@ Leyendo la información de estado... Hecho
 
 ### Explica los pasos que se producen entre el cliente y el servidor para que el protocolo cifre la información que se transmite. ¿Para qué se utiliza la criptografía simétrica? ¿Y la asimétrica?
 
-Una de las principales *ventajas* que ofrece el protocolo SSH frente a sus predecesores es el uso de cifrado para **garantizar** una ***transferencia segura de información entre el cliente y el servidor remoto***.
+Una de las grandes ventajas de SSH es que utiliza cifrado para garantizar una conexión segura entre el cliente y el servidor remoto.
 
-Cuando un cliente intenta conectarse al servidor a través de TCP, el servidor presenta los protocolos de cifrado y las versiones que soporta. Si el cliente tiene un protocolo y una versión compatibles, se llega a un acuerdo y se inicia la conexión con el protocolo seleccionado. En este punto, ambas partes generan claves temporales y se intercambian las claves públicas, utilizando criptografía asimétrica. El cliente debe autenticar al servidor, verificando la clave del host recibida. Si es la primera vez que se conecta, se le pregunta al usuario si confía en ella, o bien, se compara con las claves almacenadas en un archivo de hosts de confianza.
+Cuando un cliente se conecta a un servidor por TCP, el servidor muestra los protocolos y versiones de cifrado que soporta. Si el cliente es compatible, ambos acuerdan cuál usar y empiezan a intercambiar claves públicas utilizando criptografía asimétrica. El cliente también verifica la clave del servidor para confirmar que es confiable. Si es la primera vez que se conecta, puede aceptar la clave manualmente o compararla con un archivo de claves conocidas.
 
-Una vez realizada esta verificación, ambas partes utilizan el Algoritmo de Intercambio de Claves Diffie-Hellman para generar una clave simétrica. Este algoritmo permite que tanto el cliente como el servidor lleguen a una clave de cifrado común, que se empleará para cifrar toda la sesión de comunicación. El uso de criptografía asimétrica para mantener la conexión cifrada durante todo el proceso sería inviable debido al elevado costo computacional que implicaría.
+Después de esta verificación, cliente y servidor utilizan el algoritmo Diffie-Hellman para generar una clave simétrica compartida. Esta clave común se usará para cifrar la comunicación durante toda la sesión, ya que mantener la conexión cifrada con criptografía asimétrica sería demasiado lento.
 
-Tras establecerse el cifrado simétrico para asegurar la comunicación entre el servidor y el cliente, el cliente debe autenticarse para permitir el acceso.
+Finalmente, el cliente debe autenticarse (por contraseña o clave) para completar el acceso al servidor.
 
 ### Explica los dos métodos principales de autentificación: por contraseña y utilizando un par de claves públicas y privadas.
 
-La última etapa antes de otorgar acceso al servidor al usuario es la autenticación de sus credenciales, para lo cual se utilizan dos métodos principales de autenticación:
+1. **Contraseña**: Se solicita al usuario la contraseña asociada al nombre de usuario con el que intenta conectarse. Estas credenciales se transmiten de manera segura a través del túnel cifrado simétricamente, para que nos ea nadie usurpando su identida.
 
-1. **Contraseña**: Se solicita al usuario la contraseña asociada al nombre de usuario con el que intenta conectarse. Estas credenciales se transmiten de manera segura a través del túnel cifrado simétricamente, garantizando que no puedan ser interceptadas por terceros.
-
-2. **Par de claves**: El usuario tiene su clave pública almacenada en el servidor (específicamente en el archivo `~/.ssh/authorized_keys`). Al intentar conectarse, el usuario le informa al servidor que es el propietario de esa clave. El servidor, al no confiar completamente, le realiza un "desafío", que consiste en cifrar un mensaje con la clave pública y enviarlo al usuario. El usuario debe descifrar el mensaje utilizando su clave privada asociada a la clave pública.
-
+2. **Par de claves**:a clave pública del usuario está almacenada en el servidor, en el archivo ~/.ssh/authorized_keys. Al conectarse, el usuario afirma ser el propietario de esa clave. Para verificarlo, el servidor envía un "desafío", que consiste en cifrar un mensaje con la clave pública del usuario. Este debe descifrarlo usando su clave privada correspondiente, demostrando así su autenticidad.
 
 ### En el cliente, ¿para qué sirve el contenido que se guarda en el fichero ~/.ssh/known_hosts?
 
-Se emplea para autenticar los servidores a los que nos conectamos. En este archivo se almacenan todas las claves públicas de los servidores con los que hemos establecido conexión previamente. Así, cuando nos conectamos a un servidor, el cliente verifica que la clave pública del servidor coincida con la que tiene registrada en el archivo.
+
+Este archivo se utiliza para autenticar los servidores a los que nos conectamos. En él se guardan las claves públicas de los servidores con los que ya hemos establecido conexión antes. De esta manera, cuando intentamos conectarnos nuevamente a un servidor, el cliente comprueba si la clave pública del servidor coincide con la que tiene registrada en el archivo.
 
 
 ### ¿Qué significa este mensaje que aparece la primera vez que nos conectamos a un servidor?
@@ -919,10 +902,10 @@ $ ssh debian@172.22.200.74
  ECDSA host key for 172.22.200.74 has changed and you have requested strict checking.
 ```
 
-Este mensaje nos sale por pantalla, es porque el servidor ha cambiado su clave pública pero la dirección IP del host no ha cambiado, por lo que nos da un aviso de que alguien puede que este haciendo un ***ataque man-in-the-middle***, por lo que podemos solucionarlo eliminando la clave pública del serviodor del fichero ***~/.ssh/known_hosts***, con el siguiente comando:
+Este mensaje nos sale por pantalla, es porque el servidor ha cambiado su clave pública pero la dirección IP del host no ha cambiado, pero se puede solucionar eliminando la clave pública del serviodor del fichero ***~/.ssh/known_hosts***, con el siguiente comando:
 
 ```ssh-keygen -f "/home/jose/.ssh/known_hosts" -R "172.22.200.74"```
 
 ### ¿Qué guardamos y para qué sirve el fichero en el servidor ~/.ssh/authorized_keys? 
 
-Este archivo es exclusivo para cada usuario y contiene las claves públicas de los clientes que se han conectado al servidor. Así, el servidor guarda las claves públicas de los clientes que han establecido conexión con él y puede autenticar su identidad.
+Este archivo es exclusivo para cada usuario y contiene las claves públicas de los clientes que se han conectado al servidor.
