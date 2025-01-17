@@ -369,17 +369,17 @@ La página la he hecho de la siguiente manera explicada en el siguiente [post](.
 
 ### Creación de Autoridad Certificadora
 
-El primer paso que vamos a  hacer es egenerar un directorio en el que ubicaremos nuestra entidad certificadora, cuya finalidad es mantener una organización, por lo que el nombre que va a a tener es **CA/**, y este tendrá distintos directorios:
+Primero, crearemos un directorio llamado CA/ para organizar nuestra entidad certificadora (CA). Dentro de este, añadiremos subdirectorios específicos para diferentes propósitos:
 
-- **certs**: En dicho directorio se almacenarán los certificados firmados.
-- **crs**: En dicho directorio se almacenarán los ficheros de solicitud de firma de certificados (CSR).
-- **crl**: En dicho directorio se almacenará la lista de certificados que han sido revocados (CRL).
-- **private**: En dicho directorio se almacenará la clave privada de la autoridad certificadora.
+- **certs**: Almacén los certificados firmados.
+- **crs**: Almacén los ficheros de solicitud de firma de certificados.
+- **crl**: Almacén la lista de certificados que han sido revocados.
+- **private**: Almacén la clave privada de la autoridad certificadora.
 
 A parte del directorio y sus subdirectorios, necesitare en el directorio **CA/** un fichero el cual vamos a llamar **index.txt**, que va a actuar como bases de datis para los certificados existente.
 
 
-Ahora haremos una series de paso que será los siguientes que no piden en las preguntas de la práctica:
+Ahora haré una series de paso que será los siguientes que no piden en las preguntas de la práctica:
 
 1. **Crear su autoridad certificadora (generar el certificado digital de la CA). Mostrar el fichero de configuración de la AC.**
 
