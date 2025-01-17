@@ -72,7 +72,6 @@ gpg:                usando RSA clave B7E822D8FB45BD8BAF2F31561B80812C7BB9EA86
 gpg: Firma correcta de "Andrés Morales González <asirandyglez@gmail.com>" [absoluta]
 ```
 
-Como se puede ver, el fichero original y la firma se encuentran en ficheros separados, de manera que podríamos enviarlos a un compañero para que así verificase la integridad del fichero, haciendo uso de nuestra clave pública, con la que hemos estado trabajando hasta el momento.
 
 Nuestro compañero (Alejandro Liáñez Frutos) ha hecho el mismo proceso que nosotros, por lo que voy a importar la clave pública de la persona que lo ha firmado.
 
@@ -87,9 +86,9 @@ gpg:          No hay indicios de que la firma pertenezca al propietario.
 Huellas dactilares de la clave primaria: B397 2246 8D05 99C3 B62F  9AEA 9E7B EEE5 32BE 0469
 ```
 
-La firma mostrada es válida, tal como lo confirma la salida del comando utilizado. Sin embargo, al analizar más detenidamente, observamos un mensaje que indica que la clave no está certificada por una firma confiable. Esto implica que no se puede garantizar que la firma pertenezca realmente a quien dice ser. Esta situación ocurre porque no hemos validado la clave pública importada, en este caso, la correspondiente a Alejandro Liáñez Frutos. En otras palabras, aún no hemos firmado esta clave ni contamos con validaciones indirectas a través de terceros de confianza.
+La firma mostrada es válida, tal como lo confirma la salida del comando utilizado. 
 
-Para continuar con la práctica, procederé a eliminar la clave pública de Alejandro Liáñez Frutos de mi anillo de claves. Esto me permitirá empezar desde un entorno completamente limpio, manteniendo únicamente mi clave en el anillo. Para ello, utilizaré la opción de comando  ```--delete-keys```:
+Eliminar la clave pública de Alejandro Liáñez Frutos Para ello, utilizaré la opción de comando  ```--delete-keys```:
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
@@ -405,7 +404,7 @@ gpg: Firma correcta de "Alejandro Herrera Jiménez <alejandroherrera140697@gmail
 
 ### Configura el cliente de correo evolution/thunderbird con tu cuenta de correo habitual.
 
-Para esta ocasión lo que haremos sera la instalación de ***Thunderbird***, con el siguiente comando:
+Ahora tendrem que hacer la instalación de ***Thunderbird***, con el siguiente comando:
 
 ```sudo apt install thunderbird-l10n-es-es -y```
 
