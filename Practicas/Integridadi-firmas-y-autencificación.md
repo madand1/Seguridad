@@ -486,7 +486,7 @@ Desde ****Thunderbird**** podemos ver el mensaje encriptado, que nos ha pasado n
 
 #### Añadid a la tarea 2 un último punto consistente en enviarle un correo electrónico al profesor un mensaje firmado por vosotros y que solo pueda descifrar yo.
 
-Para realizar esta actividad extra, vamos a importar la clave pública del profesor a nuestro sistema, y la exportamos en formato ASCII para poder enviarla por correo electrónico.
+Ahora voy  a importar la clave pública del profesor a nuestro sistema, y la exportamos en formato ASCII para poder enviarla por correo electrónico.
 
 
 Por lo que procederemos a meternos en la [wiki](https://dit.gonzalonazareno.org/redmine/projects/asir2/wiki/Claves_p%C3%BAblicas_PGP_2024-2025) y procedemos a descargarnos la clave de Raúl Ruiz Padilla.
@@ -520,7 +520,7 @@ y como vemos esta enviado con ***OPENGPG***
 
 ### Para validar el contenido de la imagen CD, solo asegúrese de usar la herramienta apropiada para sumas de verificación. Para cada versión publicada existen archivos de suma de comprobación con algoritmos fuertes (SHA256 y SHA512); debería usar las herramientas sha256sum o sha512sum para trabajar con ellos.
 
-Para no manchar lo que es el apartado de esta tarea, dejo por aqui el [script](scrip-apartado1-tarea3.md) de lo que saldría por pantalla con la secuencia de comandos que mencionare con posteridad.
+Por comodidad, dejo por aqui el [script](scrip-apartado1-tarea3.md) de lo que saldría por pantalla con la secuencia de comandos que mencionare con posteridad.
 
 Pasos para la validacion del contenido de la imagen:
 
@@ -774,7 +774,7 @@ uid        [desconocida] Spotify Public Repository Signing Key <tux@spotify.com>
 
 ### ¿En que fichero se guarda el anillo de claves que usa la herramienta apt-key?
 
-En el sistema, el anillo de claves que maneja apt-key se almacena en el archivo /etc/apt/trusted.gpg, donde se van agregando las nuevas claves. Además, como vimos en el ejemplo anterior, hay otros keyrings adicionales ubicados en el directorio /etc/apt/trusted.gpg.d/, que también contienen más claves confiables.
+En el sistema, el anillo de claves que maneja apt-key se almacena en el archivo /etc/apt/trusted.gpg, donde se van agregando las nuevas claves.
 
 ### ¿Qué contiene el archivo Release de un repositorio de paquetes? ¿Y el archivo Release.gpg? Explica el proceso por el cual el sistema nos asegura que los ficheros que estamos descargando son legítimos.
 
