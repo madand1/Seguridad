@@ -845,22 +845,24 @@ Una vez tenemos el reinicio de apache, se nos vera de la siguiente manera:
 
 ![alt text](image-1.png)
 
-Como se puede apreciar, se nos ha mostrado una advertencia de seguridad, por lo que podemos asegurar que la redirección de **http://** a **https://** ha funcionado correctamente.
+La advertencia de seguridad indica que la redirección de http:// a https:// ha funcionado, pero el navegador no puede verificar la firma del certificado recibido porque no tiene la clave pública o el certificado de la CA. Por ello, es necesario importarlo manualmente.
 
-Ésta advertencia es debida a que el navegador no ha podido comprobar la firma por parte de la CA en el certificado recibido por el servidor, básicamente porque no tiene la clave pública o certificado de la CA, por lo que debemos importarlo manualmente en el navegador.
+En Firefox, para importar el certificado de una CA, sigue estos pasos:
 
-Para importar el certificado de la CA en un navegador Firefox, tendremos que pulsar en el icono de las **3 barras** en la **barra superior**, seguidamente en Preferencias y una vez ahí **(Ajustes)**, buscar el apartado **Privacidad & Seguridad**. Si nos desplazamos hasta la parte inferior del mismo, encontraremos la sección **Certificados**, en la que debemos pulsar en **Ver certificados**. Acto seguido, nos moveremos al apartado **Autoridades** para que así, pulsando en **Importar**, nos permita importar el certificado de una autoridad certificadora.
-
-Una vez seleccionado el certificado que vamos a importar, se nos mostraŕa un mensajer en el que nos dice **Se le ha pedido que confie en una nueva Autoridad Certificadora (CA)** y le damos a **Aceptar**.
+Haz clic en el icono de las tres barras en la parte superior.
+Ve a Preferencias o Ajustes.
+En el apartado Privacidad & Seguridad, desplázate hacia abajo hasta Certificados y selecciona Ver certificados.
+En la pestaña Autoridades, haz clic en Importar y selecciona el certificado de la CA.
+Cuando aparezca el mensaje que dice Se le ha pedido que confíe en una nueva Autoridad Certificadora (CA), confirma la acción seleccionando Aceptar.
 
 Tras todo esto, podremos ver que ha sido correctamente importado:
 ![alt text](image-3.png)
 
-Posteriormente, recargaremos el navegador para así volver a mostrar la página ``andy.iesgn.org``, accediendo desde HTTPS:
+Ac tualizamos el navegador para así volver a mostrar la página ``andy.iesgn.org``, accediendo desde HTTPS:
 
 ![alt text](image-4.png)
 
-Y como podemos apreciar se nos ha vuelto a mostrar la advertencia de seguridad, si nos fijamos al lado de la URL, por lo que si pulsamos el candado, se nos mostrará la información referente:
+Y como podemos apreciar se nos ha vuelto a mostrar la advertencia de seguridad, si nos fijamos al lado de la URL, pero podemos bver la información:
 
 ![alt text](image-5.png)
 
@@ -870,7 +872,7 @@ Y si le damos a **Ver certificado**, nos saldrá lo siguiente:
 
 ![alt text](image-7.png)
 
-En esto podemos ver todda la información técnica sobre el certificado, asi como el nombre de la entidad, fecha en la que tiene expiración...
+Podemos ver todda la información técnica sobre el certificado.
 
 ##### ¿Por qué no es seguro siendo HTTPS?
 
@@ -886,17 +888,23 @@ Lo primero que voy a hacer es desinstalar apache e instalar nginx, para que no h
 debian@cripto:~$ sudo apt remove apache2 && apt install nginx -y
 ```
 
-Ahroa, comenzaré con la configuración del nuevo servidor web. Este servicio, también implementa un VirtualHost por defecto, pero a diferencia de apache2, podremos unificar la configuración del VirtualHost correspondiente al puerto 80 y el correspondiente al 443 en un único fichero, que se encuentra ubicado en ``/etc/nginx/sites-available/default``. Para modificarlo, ejecutaremos el comando:
+Configuracion del server que se encuentra ubicado en ``/etc/nginx/sites-available/default``. Para modificarlo:
 
 ```debian@cripto:~$ sudo nano /etc/nginx/sites-available/default```
 
-Dentro del mismo tendre que crear dos directivas **server**, una para el VirtualHost accesible en el puerto 80 HTTP, dentro del cuál únicamente asignaremos el ServerName correspondiente y una redirección permanente para así forzar HTTPS. En la otra, para el VirtualHost accesible en el puerto 443 HTTPS, tendremos que configurar las siguientes directivas:
+Para configurar un servidor con soporte para HTTPS, se definen dos directivas server:
 
-- **server_name**: Indicaremos el nombre de dominio a través del cuál accederemos al servidor.
-- **ssl**: Activa el motor SSL, necesario para hacer uso de HTTPS, por lo que su valor debe ser on.
-- **ssl_certificate**: Indicamos la ruta del certificado del servidor firmado por la CA. En este caso, ``/etc/ssl/certs/andres_firmado.crt``.
-- **ssl_certificate_key**: Indicamos la ruta de la clave privada asociada al certificado del servidor. En este caso, ``/etc/ssl/private/andy-priv.key``.
+VirtualHost en el puerto 80 (HTTP):
 
+Configuramos el ServerName correspondiente al dominio.
+Implementamos una redirección permanente para forzar el uso de HTTPS.
+VirtualHost en el puerto 443 (HTTPS):
+Configuramos las siguientes directivas:
+
+- server_name: Especificamos el dominio a través del cual accederemos al servidor.
+- ssl: Activamos SSL para habilitar HTTPS (valor: on).
+- ssl_certificate: Indicamos la ruta del certificado del servidor (por ejemplo, /etc/ssl/certs/andres_firmado.crt).
+- ssl_certificate_key: Especificamos la ruta de la clave privada asociada al certificado (por ejemplo, /etc/ssl/private/andy-priv.key).
 
 Por lo que el fichero editado será así:
 
@@ -954,7 +962,7 @@ server {
         }
 }
 ```
-Una vez hecho esto, ahora lo que procedo es a hacer un ```index.html``` en la siguiente dirección ``/var/www/html/andy.iesgn.org/index.html``
+AHora hare un ```index.html``` en la siguiente dirección ``/var/www/html/andy.iesgn.org/index.html``
 :
 
 ```
@@ -971,14 +979,6 @@ debian@cripto:/var/www/html/andy.iesgn.org$ cat index.html
     </body>
 </html>
 
-```
-
-Ahora lo que haré sera realizar la firma del certificado de nuevo, ya que me he equivocado a la hora de poner la contraseña que nos pide, por lo que usare lo siguiente:
-
-```
-debian@cripto:~$ sudo openssl rsa -in /etc/ssl/private/andy-priv.key -out /etc/ssl/private/andy-priv.key
-Enter pass phrase for /etc/ssl/private/andy-priv.key:
-writing RSA key
 ```
 
 Hacemos la realización del enlace simbolico del fichero de configuracion y reinicio el servicio de nginx:
