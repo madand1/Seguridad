@@ -5,7 +5,8 @@ Para la realización de esta práctica recomiendo que se haga una lectura de los
 - [Cifrado asimétrico](Seguridad/Practicas/Cifadro-Asimétrico.md)
 - [Integridad, firmas y autentificación](Seguridad/Practicas/Integridadi-firmas-y-autencificación.md)
 
-Ya que estos tendrán un tema importante en esta parte, pero al haberlo tratado en profundidad anteriormente, vamos a obviar ciertos aspectos o pasos.
+Ya que estos tendrán un tema importante en esta parte, pero al haberlo tratado con ahinco anteriormente, no me voy a parar en lo que no sea de ayuda en estos momentos.
+
 ## Certificado digital de persona física
 
 ### Introducción
@@ -21,9 +22,6 @@ Ahora vamos a proceder obtener el certificado, y hacer la instalación.
 ## Tarea 1: Instalación del certificado
 
 ### Instalación del certificado en nuestro navegador
-
-
-
 
 1. **Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.**
 
@@ -849,16 +847,17 @@ La advertencia de seguridad indica que la redirección de http:// a https:// ha 
 
 En Firefox, para importar el certificado de una CA, sigue estos pasos:
 
-Haz clic en el icono de las tres barras en la parte superior.
-Ve a Preferencias o Ajustes.
-En el apartado Privacidad & Seguridad, desplázate hacia abajo hasta Certificados y selecciona Ver certificados.
-En la pestaña Autoridades, haz clic en Importar y selecciona el certificado de la CA.
-Cuando aparezca el mensaje que dice Se le ha pedido que confíe en una nueva Autoridad Certificadora (CA), confirma la acción seleccionando Aceptar.
+- Haz clic en el icono de las tres barras en la parte superior.
+- Ve a Preferencias o Ajustes.
+- En el apartado Privacidad & Seguridad, desplázate hacia abajo hasta Certificados y selecciona Ver certificados.
+- En la pestaña Autoridades, haz clic en Importar y selecciona el certificado de la CA.
+- Cuando aparezca el mensaje que dice Se le ha pedido que confíe en una nueva Autoridad Certificadora (CA), confirma la acción seleccionando Aceptar.
 
 Tras todo esto, podremos ver que ha sido correctamente importado:
+
 ![alt text](image-3.png)
 
-Ac tualizamos el navegador para así volver a mostrar la página ``andy.iesgn.org``, accediendo desde HTTPS:
+Actualizamos el navegador para así volver a mostrar la página ``andy.iesgn.org``, accediendo desde HTTPS:
 
 ![alt text](image-4.png)
 
@@ -882,7 +881,7 @@ Ya hemos comprobado que con **apache2** hemos conseguido hacer que HTTPS funcion
 
 #### Nginx
 
-Lo primero que voy a hacer es desinstalar apache e instalar nginx, para que no haya ningún conflicto, por lo que ejeutaremos el siguiente comando:
+Lo primero que voy a hacer es desinstalar apache e instalar nginx, para que no haya ningún conflicto, tambien puedes tenerlo en el mimso sitios ambos servidores, pero por comodidad, yo tengo una máquina para cosa, por lo que ejeutaremos el siguiente comando:
 
 ```
 debian@cripto:~$ sudo apt remove apache2 && apt install nginx -y

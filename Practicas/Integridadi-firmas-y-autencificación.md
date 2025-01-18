@@ -33,7 +33,7 @@ uid        [  absoluta ] Andrés Morales González <asirandyglez@gmail.com>
 sub   rsa3072 2024-12-16 [E] [caduca: 2026-12-16]
 ```
 
-Como podemos ver, las claves existentes en mi anillo de claves es la mía personal y la de ***Alejandro Liáñez Frutos***, así que procederemos a subir dicha clave a un servidor de claves,por lo que usaremos:
+Como podemos ver, las claves existentes en mi anillo de claves es la mía personal y la de ***Alejandro Liáñez Frutos***, así que subiré esta clave a un servidor de claves,por lo que usaremos:
 
 ```gpg --keyserver keys.gnupg.net --send-key <ID> ```
 
@@ -477,7 +477,9 @@ Para que esto tenga validez lo que haremos sera seleccionar mi clave privada en 
 ![alt text](img/gpg-nuevos-mensajes.png)
 
 Una vez esto lo que haremos será escribir el nuevo mensaje para nuestro compañero, y este lo que tendremos que hacer es importar su clave, y ya con eso podremos mandarle el mail correspondiente.
+
 ![alt text](img/enviado-mail.png)
+
 Desde ****Thunderbird**** podemos ver el mensaje encriptado, que nos ha pasado nuestro compañero, mientras que si lo abrimos en nuestro correo ordinario (Gmail) no lo podemos abrir:
 
 ![alt text](img/mensaje-liañez.png)
@@ -635,7 +637,7 @@ El comando `apt-key` no permite gestionar las claves utilizadas por APT para aut
 - `list`: Muestra todas las claves de confianza.
 - `finger`: Muestra los fingerprints de todas las claves de confianza.
 
-A continuación, mostramos un ejemplo de la salida del comando `apt-key list`, que nos mostrará todas las claves consideradas como confiables por APT:
+Un ejemplo sería la salida del comando `apt-key list`, que nos muestra todas las claves de confianza::
 
 ```
 madandy@toyota-hilux:~/Documentos/SegundoASIR/security$ 
@@ -848,11 +850,11 @@ Leyendo la información de estado... Hecho
 
 ### Explica los pasos que se producen entre el cliente y el servidor para que el protocolo cifre la información que se transmite. ¿Para qué se utiliza la criptografía simétrica? ¿Y la asimétrica?
 
-Una de las grandes ventajas de SSH es que utiliza cifrado para garantizar una conexión segura entre el cliente y el servidor remoto.
+Una de las grandes ventajas de SSH es que utiliza cifrado para garantizar una conexión segura entre el cliente y el servidor remoto, y esto no ahorra tener que verificarnos cada vez que entremos en cualquier sitio que tengamos confianza.
 
 Cuando un cliente se conecta a un servidor por TCP, el servidor muestra los protocolos y versiones de cifrado que soporta. Si el cliente es compatible, ambos acuerdan cuál usar y empiezan a intercambiar claves públicas utilizando criptografía asimétrica. El cliente también verifica la clave del servidor para confirmar que es confiable. Si es la primera vez que se conecta, puede aceptar la clave manualmente o compararla con un archivo de claves conocidas.
 
-Después de esta verificación, cliente y servidor utilizan el algoritmo Diffie-Hellman para generar una clave simétrica compartida. Esta clave común se usará para cifrar la comunicación durante toda la sesión, ya que mantener la conexión cifrada con criptografía asimétrica sería demasiado lento.
+Después de esta verificación, cliente y servidor utilizan un algoritmo para generar una clave simétrica compartida , este se llama DIffie. Esta clave común se usará para cifrar la comunicación durante toda la sesión, ya que mantener la conexión cifrada con criptografía asimétrica sería demasiado lento.
 
 Finalmente, el cliente debe autenticarse (por contraseña o clave) para completar el acceso al servidor.
 
