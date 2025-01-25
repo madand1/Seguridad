@@ -462,7 +462,7 @@ sudo systemctl status openvpn-server@servidor
 
 Ahora vamos a por la configuración del servidor 2 tambien llamado esutaquio.
 
-# Configuración de Servidor 2.
+## Configuración de Servidor 2.
 
 Por lo que vamos a a instalar **OpenVPN** , con el siguiente comando: `sudo apt install openvpn`
 
