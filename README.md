@@ -7,9 +7,10 @@
 - [2. Integridad, firmas y autenticación](./Practicas/Integridadi-firmas-y-autencificación.md)
 - [3. Certificados y HTTPS](./Practicas/certificados-y-HTTPS.md)
 
-## VPN
+### VPN
 
 - [1. Acceso remoto con OpenVPN y certificados x509](./Practicas/VPN/a.md)
+- [2. Acceso site to site con OpenVPN y certificados x509](./Practicas/VPN/b.md)
 
 ## Autor :computer:
 * Andrés Morales González

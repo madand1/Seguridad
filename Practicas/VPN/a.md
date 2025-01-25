@@ -20,7 +20,7 @@ Vamos a ir por parte y vamos a configurar primeramente el servidor y por consigu
 Lo primero que vamos a hacer después de arrancar la máquina será instalar **openvpn** con el siguiente comando:
 `sudo apt install openvpn -y`
 
-Trás eso vamos a habilitar el **bit de forwarding**, por lo que editaremos el siguiente fichero descomentando la línea que pone lo siguiente:
+Trás eso vamos a habilitar el **bit de forwarding**, por lo que editaremos el siguiente fichero `/etc/sysctl.conf` descomentando la línea que pone lo siguiente:
 
 `net.ipv4.ip_forward=1`
 
