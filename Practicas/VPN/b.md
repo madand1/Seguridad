@@ -27,13 +27,17 @@ Tras ello aseguramos que se ha habilitado bien, haciendo uso del siguiente coman
 
 **🚨 Esto que acabamos de hacer nos ahorrará demasiados quebraderos de cabeza, ya lo confirmo yo. 🚨**
 
-AHora hacemos el siguiente comando:
+Ahora hacemos el siguiente comando para copiar lo que viene de ejemplo en vars.exameple a la ruta que vamos a poner como predeterminada en lo nuestro:
 
 `sudo cp /usr/share/easy-rsa/vars.example /etc/openvpn/easy-rsa/vars`
 
 Esto lo tienes que hacer para poder personalizar los parametros de generación de certificados para **OpenVPN**, aqui dejo las modificaciones que tiene mi fichero `vars`
 
-- Fichero vars modificado:
+Con el comando:
+
+`sudo nano /etc/openvpn/easy-rsa/vars/vars`
+
+Y las lineas que modicas son estas:
 
 ```
 set_var EASYRSA_REQ_COUNTRY     "USA"
