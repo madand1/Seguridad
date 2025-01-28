@@ -9,13 +9,15 @@
 
 ### VPN
 
-### Certificados x509
+#### Certificados x509
 
 - [1. Acceso remoto con OpenVPN y certificados x509](./Practicas/VPN/a.md)
 - [2. Acceso site to site con OpenVPN y certificados x509](./Practicas/VPN/b.md)
 
-### Wireguard
+#### Wireguard
+
 - [4. Acceso site to site con WireGuard](./Practicas/VPN/d.md)
+
 ## Autor :computer:
 * Andrés Morales González
 * :school:I.E.S. Gonzalo Nazareno :round_pushpin:(Dos Hermanas, Sevilla).
