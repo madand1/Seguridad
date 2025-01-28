@@ -175,3 +175,4 @@ Y ahora para hacer la verificación lo haremos tanto por parte del **cliente 1**
 🍻 ¡Enhorabuena! 🎉  Ahora te mereces una cerveza bien fría. ¡Salud! 🍺😎  
 ¡Disfruta tu cerveza! 🍺😄
 
+![Celebra hermano](cheers-beer.gif)
