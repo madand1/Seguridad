@@ -1,6 +1,6 @@
 # Escenario
 
-![Escernario](Escenario-b-apartado-vpn.png)
+![Escenario C](escenario-c.png)
 
 
 Antes de empezar a configurar lo que son las vpn, y servidorhe hecho ha sido confirgurarado el cliente que va a estar hiper aislado, es decir, **cliente 1** solo con su ip correspondiente y con la puerta de enlace dirigida al servidor.
