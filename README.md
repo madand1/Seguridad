@@ -16,6 +16,7 @@
 
 #### Wireguard
 
+- [3. Acceso remoto con WireGuard](./Practicas/VPN/c.md)
 - [4. Acceso site to site con WireGuard](./Practicas/VPN/d.md)
 
 ## Autor :computer:
