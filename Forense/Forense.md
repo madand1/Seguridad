@@ -1558,9 +1558,9 @@ Writing inode tables: done
 Creating journal (32768 blocks): done
 Writing superblocks and filesystem accounting information: done   
 
-andy@debian-forense:~$ sudo mkdir -p /mnt/volcadolinux
-andy@debian-forense:~$ sudo mount /dev/vdb1 /mnt/volcadolinux
-andy@debian-forense:~$ sudo dd if=/dev/vda of=/mnt/volcadolinux/discolinux.img bs=64K status=progress
+andy@debian-forense:~$ sudo mkdir -p /mnt/nuevo_disco
+andy@debian-forense:~$ sudo mount /dev/vdb1 /mnt/nuevo_disco
+andy@debian-forense:~$ sudo dd if=/dev/vda of=/mnt/nuevo_disco/discolinux.img bs=64K status=progress
 25988759552 bytes (26 GB, 24 GiB) copied, 54 s, 481 MB/s 
 409600+0 records in
 409600+0 records out
@@ -1576,7 +1576,7 @@ vda    254:0    0   25G  0 disk
 ├─vda2 254:2    0    1K  0 part 
 └─vda5 254:5    0  975M  0 part [SWAP]
 vdb    254:16   0   50G  0 disk 
-├─vdb1 254:17   0   50G  0 part /mnt/volcadolinux
+├─vdb1 254:17   0   50G  0 part /mnt/nuevo_disco
 └─vdb2 254:18   0  512B  0 part 
 
 ```
@@ -1610,8 +1610,8 @@ Entramos:
 andy@debian-forense:~$ cd LiME/
 andy@debian-forense:~/LiME$ cd src/
 andy@debian-forense:~/LiME/src$ 
-andy@debian-forense:~/LiME/src$ sudo insmod lime-6.1.0-31-amd64.ko "path=/mnt/volcadolinux/memdump.mem format=lime"
-andy@debian-forense:~/LiME/src$ ls -l /mnt/volcadolinux/
+andy@debian-forense:~/LiME/src$ sudo insmod lime-6.1.0-31-amd64.ko "path=/mnt/nuevo_disco/memdump.mem format=lime"
+andy@debian-forense:~/LiME/src$ ls -l /mnt/nuevo_disco/
 total 30408192
 -rw-r--r-- 1 root root 26843545600 feb 13 14:23 discolinux.img
 drwx------ 2 root root       16384 feb 13 14:22 lost+found
@@ -1626,16 +1626,26 @@ drwx------ 2 root root       16384 feb 13 14:22 lost+found
 Para los hashes:
 
 ```
-andy@debian-forense:~/LiME/src$ sudo find /mnt/volcadolinux/ -type f -exec sha256sum {} +
-70781c1cd608bd5ba7555488ccb748ceae78ab308b0641e4f8ebc60bfc7f0f4d  /mnt/volcadolinux/memdump.mem
-b2f50a956ba2c2f3afcf786f6d05a56262229bc117b55d28442ee9fa662fbc69  /mnt/volcadolinux/discolinux.img
+andy@debian-forense:~/LiME/src$ sudo find /mnt/nuevo_disco/ -type f -exec sha256sum {} +
+c3e8eb92960d0701269ebd82fb899227bf68efab918d58a4ffeb68e4fe85e910  /mnt/nuevo_disco/discolinux.img
+ce88460d2c633ec0c3f617f0124919a64b10169621069118f9f4d5db92327ae7  /mnt/nuevo_disco/memdump.mem
 
 ```
-Dejo también la imagen:
+Dejo también la imagen que contiene como hacer el coamdno y los hashes:
 
-![Hashes Linux](hashes-linux.png)
+![Hashes buenos](hashes-linux2.png)
 
-Despues de hacer los volcados, he instalado lo que es Volatily como en el caso anterior, pero a la hora de conectar lo que es el volcado de memoria que hice, es decir el disco, est no realiza ningun tipo de analisis, por lo que lo voy a hacer desde la terminal de la propia máquina Linux.
+Y dejo por aquí los elementos que tengo en el /mnt/nuevo_disco:
+
+```bash
+andy@debian-forense:~/LiME/src$ ls -l /mnt/nuevo_disco/
+total 25165312
+-rw-r--r-- 1 root root 21474836480 feb 13 18:11 discolinux.img
+drwx------ 2 root root       16384 feb 13 18:03 lost+found
+-r--r--r-- 1 root root  4294417504 feb 13 18:09 memdump.mem
+```
+
+Después de hacer los volcados, he instalado lo que es Volatily como en el caso anterior, pero a la hora de conectar lo que es el volcado de memoria que hice, es decir el disco, est no realiza ningun tipo de analisis, por lo que lo voy a hacer desde la terminal de la propia máquina Linux.
 
 
 ##### 1. Procesos en ejecución.
