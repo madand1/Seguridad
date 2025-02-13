@@ -1619,15 +1619,21 @@ drwx------ 2 root root       16384 feb 13 14:22 lost+found
 
 
 ```
+## Comandos para el volcado de memorias en linux:
+
+![COmandos para crear la memoria en linux el volcado](comandos-volcados-linux.png)
 
 Para los hashes:
 
 ```
 andy@debian-forense:~/LiME/src$ sudo find /mnt/volcadolinux/ -type f -exec sha256sum {} +
-9ef96c2afc21b664df9f1966fa95088a00cf3e83317087809eb06c4f91f86797  /mnt/volcadolinux/discolinux.img
-30c2feecc8fb598f3e08c2e3ed695a844b5b5044e332c7dc52650a7df123052a  /mnt/volcadolinux/memdump.mem
+70781c1cd608bd5ba7555488ccb748ceae78ab308b0641e4f8ebc60bfc7f0f4d  /mnt/volcadolinux/memdump.mem
+b2f50a956ba2c2f3afcf786f6d05a56262229bc117b55d28442ee9fa662fbc69  /mnt/volcadolinux/discolinux.img
 
 ```
+Dejo también la imagen:
+
+![Hashes Linux](hashes-linux.png)
 
 Despues de hacer los volcados, he instalado lo que es Volatily como en el caso anterior, pero a la hora de conectar lo que es el volcado de memoria que hice, es decir el disco, est no realiza ningun tipo de analisis, por lo que lo voy a hacer desde la terminal de la propia máquina Linux.
 
