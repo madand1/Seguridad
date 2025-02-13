@@ -19,6 +19,12 @@
 - [3. Acceso remoto con WireGuard](./Practicas/VPN/c.md)
 - [4. Acceso site to site con WireGuard](./Practicas/VPN/d.md)
 
+
+### Informática Forense
+
+- [1.Informatcia forense](./Forense/Forense.md)
+
+
 ## Autor :computer:
 * Andrés Morales González
 * :school:I.E.S. Gonzalo Nazareno :round_pushpin:(Dos Hermanas, Sevilla).
