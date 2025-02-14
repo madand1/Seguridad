@@ -199,7 +199,7 @@ En este apartado no lo he podido encontrar, ya que pense que al tener tanto tiem
 
 #### - Búsqueda de imagenes por ubicación.
 
-Tras realizar lo que es el análisis foresnse de lo que es la imagen "Foto.jpg" usando la herramientas **Autopsy**, he podido comprobar la ausencia de metadatso de geolocalización en los datos extraídos, y para terminar de comprobar que no ha salido mal, lo que hice fue extraerla y llevarla a
+Tras realizar lo que es el análisis foresnse de lo que es la imagen "Foto.jpg" usando la herramientas **Autopsy**, he podido comprobar la ausencia de metadatso de geolocalización en los datos extraídos, y para terminar de comprobar que no ha salido mal, lo que hice fue extraerla y llevarla a una página externa, dejó por aquí el prceso que llevé acabo.
 
 Dejo por aqui las pruebas que hice en **Autopsy**:
 
