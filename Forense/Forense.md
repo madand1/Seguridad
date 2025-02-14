@@ -8,12 +8,16 @@ En esta práctica, se realizará la fase de toma de evidencias y análisis de la
 
 Vamos a suponer que pillamos al delincuente **in fraganti** y las máquinas se encontraban encendidas.
 
-Sobre cada una de las máquinas vamos a realizar el proceso de toma de evidencias siguiendo las directrices contenidas en **RFC 3227**  (incluyendo un volcado de memoria y otro de disco duro), tomando las medidas necesarias para certificar posteriormente la cadena de custodia.
+Sobre cada una de las máquinas vamos a realizar el proceso de toma de evidencias siguiendo las directrices contenidas en **RFC-3227**  (incluyendo un volcado de memoria y otro de disco duro), tomando las medidas necesarias para certificar posteriormente la cadena de custodia.
+
+Para esta práctica lo que deberiamos de hacer es asegurar lo que se llama **cadena de custodia** de lo que sería las evidencias que se han recogido, por lo que habría que evitar instalar los programas que necesitemos en la máquina de la cual estamos sospechando (como no tenemos suficiente memoria, esto no lo podré hacer, por lo que lo haré en la misma máquina).
+
+Por lo que en terminos de buena praxis, se usaria lo que es un dispositivo externo (USB, disco duro externo) donde previamente hemos instalado las herramientas necesarias. Una vez que lo hemos conectado, vamos a proceder a ejecutar lo que sería el programa o programas, lo que esto cargara temporalmente en la RAM sin dejar ningún tipo de rastro.
+
+Los dos tipos de volcado tanto el de memoria y el disco, van a estar en el disco que conectemoes externamente. Luego una vez hecho esto, lo que hariamos será extraer el disposituivo, y hariamos lo que es el análisis de la información obtenida en lo que sería en un entorno seguro.
 
 
-
-
-
+Dejo por aquí diferenciado lo que sería ambas máquinas **Windows** y **Linux**.
 
 # Windows
 
@@ -91,7 +95,7 @@ Y nos dará los siguientes archivos:
 
 ## Instalación de autopsy
 
-En este apartado procedermos a instalar la herramienta [Autopsy](https://www.autopsy.com/download/),una vez instalado, procedemos a ejecutarlo, como lo queria instalar en el **disco C** y este no me deja ya que el espacio es minusculo, lo que hice fue añadir un disco de 10 solamente para autpsy, por lo que quedara de la siguiente manera:
+En este apartado procederemos a instalar la herramienta [Autopsy](https://www.autopsy.com/download/),una vez instalado, procedemos a ejecutarlo, como lo queria instalar en el **disco C** y este no me deja ya que el espacio es minúsculo, lo que hice fue añadir un disco de 10GB solamente para autpsy, por lo que quedara de la siguiente manera:
 
 ![alt text](fw22.png)
 
@@ -1984,7 +1988,13 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 ##### 10. Redes wifi utilizadas recientemente.
 
-Esta no puedo tener salida ya que no uso ningún tipo de red inalambrica, ya que tengo deshabilitado lo que es el Wi-fi de mi equipo.
+Esta no puedo tener salida ya que no uso ningún tipo de red inalambrica, ya que tengo deshabilitado lo que es el Wi-fi de mi equipo, pero dejo por aqui lo que es el comando en terminal el cual se haría:
+
+`nmcli c show`
+
+Pero si lo hago sale esta salida:
+
+![Wifi-linux](wifi-linux.png)
 
 ##### 11. Configuración del firewall de nodo.
 
@@ -2702,6 +2712,9 @@ Para esto lo tenemos que hacer con autopsy lo he instalado en lo que es el propi
 
 Por lo que estas preguntas se quedarían sin repsonder y eso que son iguales que en lo que va siendo en windows, pero es por la instalación de lo que es la herramienta Autopsy.
 
+
+##### Preguntas sin responder
+
 19. Historial de navegación y descargas. Cookies.
 
 20. Volúmenes cifrados
@@ -2716,7 +2729,8 @@ Por lo que estas preguntas se quedarían sin repsonder y eso que son iguales que
 
 25. Búsqueda de imágenes por ubicación.
 
-26. Búsqueda de archivos por autor.
+
+###### 26. Búsqueda de archivos por autor.
 
 ```
 root@debian-forense:~# find -user root
