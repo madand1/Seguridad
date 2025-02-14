@@ -10,6 +10,8 @@ Vamos a suponer que pillamos al delincuente **in fraganti** y las máquinas se e
 
 Sobre cada una de las máquinas vamos a realizar el proceso de toma de evidencias siguiendo las directrices contenidas en **RFC-3227**  (incluyendo un volcado de memoria y otro de disco duro), tomando las medidas necesarias para certificar posteriormente la cadena de custodia.
 
+Ahora explicaré lo que es la **cadena de custodía** que en la introducción he hablado, y te quedaría igual, dejo por aquí lo que es:
+
 Para esta práctica lo que deberiamos de hacer es asegurar lo que se llama **cadena de custodia** de lo que sería las evidencias que se han recogido, por lo que habría que evitar instalar los programas que necesitemos en la máquina de la cual estamos sospechando (como no tenemos suficiente memoria, esto no lo podré hacer, por lo que lo haré en la misma máquina).
 
 Por lo que en terminos de buena praxis, se usaria lo que es un dispositivo externo (USB, disco duro externo) donde previamente hemos instalado las herramientas necesarias. Una vez que lo hemos conectado, vamos a proceder a ejecutar lo que sería el programa o programas, lo que esto cargara temporalmente en la RAM sin dejar ningún tipo de rastro.
